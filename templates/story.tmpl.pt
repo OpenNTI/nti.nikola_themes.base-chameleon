@@ -1,0 +1,36 @@
+
+<html metal:use-macro="context/@@base.tmpl/index/macros/base"
+	  xmlns:metal="http://xml.zope.org/namespaces/metal">
+
+<!-- <%inherit file="post.tmpl"/> --> <!-- XXX post, not base. need
+										   macro -->
+
+<!-- <%namespace name="helper" file="post_helper.tmpl"/> -->
+<!-- <%namespace name="pheader" file="post_header.tmpl"/> -->
+<!-- <%namespace name="comments" file="comments_helper.tmpl"/> -->
+<!-- <%namespace name="math" file="math_helper.tmpl"/> -->
+
+
+
+<article metal:fill-slot="content"
+		 class="post-${python:options['post'].meta('type')} storypage"
+		 itemscope="itemscope"
+		 itemtype="http://schema.org/Article">
+    <header>
+<!--!        ${pheader.html_title()}
+        ${pheader.html_translations(post)}
+-->
+    </header>
+    <div class="e-content entry-content" itemprop="articleBody text">
+    ${structure:options/post/text}
+    </div>
+    <section class="comments"
+			 tal:condition="python:options['site_has_comments'] and options['enable_comments'] and not options['post'].meta('nocomments')"
+			 >
+        <h2>${python:options['messages']("Comments")}</h2>
+        ${python:options['comments'].comment_form(options['post'].permalink(absolute=True),
+		options['post'].title(), options['post'].base_path)}
+    </section>
+    <!--! ${math.math_scripts_ifpost(post)} -->
+</article>
+</html>

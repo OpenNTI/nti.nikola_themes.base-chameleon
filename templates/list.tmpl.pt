@@ -1,0 +1,31 @@
+<html metal:use-macro="context/@@base.tmpl/index/macros/base"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+>
+<!-- <%namespace name="archive_nav" file="archive_navigation_helper.tmpl" import="*"/> -->
+<!-- <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
+
+<!-- <%block name="extra_head"> -->
+<!--     ${feeds_translations.head(kind=kind, rss_override=False, has_no_feeds=has_no_feeds)} -->
+<!-- </%block> -->
+
+
+<article class="listpage" metal:fill-slot="content">
+    <header>
+        <h1>${options/title}</h1>
+    </header>
+    <!--! ${archive_nav.archive_navigation()} -->
+    <!--! ${feeds_translations.translation_link(kind)} -->
+    <ul class="postlist" tal:condition="options/items">
+		<li tal:repeat="item options/items">
+			<a tal:attributes="href python:item[1]">${python:item[0]}</a>
+			<span tal:condition="python:item[2]">(${python:item[2]})</span>
+		</li>
+    </ul>
+	<p tal:condition="not:options/items">
+		${messages("Nothing found.")}
+	</p>
+
+</article>
+
+</html>

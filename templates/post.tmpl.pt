@@ -1,0 +1,56 @@
+<html metal:use-macro="context/@@base.tmpl/index/macros/base"
+	  xmlns:metal="http://xml.zope.org/namespaces/metal">
+
+<!-- <%namespace name="helper" file="post_helper.tmpl"/> -->
+<!-- <%namespace name="pheader" file="post_header.tmpl"/> -->
+<!-- <%namespace name="comments" file="comments_helper.tmpl"/> -->
+<!-- <%namespace name="math" file="math_helper.tmpl"/> -->
+<!-- <%inherit file="base.tmpl"/> -->
+
+<metal:block fill-slot="extra_head">
+    <meta tal:condition="python:options['post'].meta('keywords')" name="keywords" content="${python:post.meta('keywords')|h}" />
+    <meta name="author" content="${options/post/author}" />
+    <link tal:condition="options/post/prev_post"
+		  rel="prev" href="${options/post/prev_post/permalink}"
+		  title="${options/post/prev_post/title}" type="text/html" />
+        <link tal:condition="options/post/next_post"
+			  rel="next" href="${options/post/next_post/permalink}"
+			  title="${options/post/next_post/title}"
+			  type="text/html" />
+
+    <meta tal:condition="options/post/is_draft" name="robots" content="noindex" />
+<!--!
+    ${helper.open_graph_metadata(post)}
+    ${helper.twitter_card_information(post)}
+    ${helper.meta_translations(post)}
+    ${math.math_styles_ifpost(post)}
+-->
+</metal:block>
+
+
+<article metal:fill-slot="content"
+		 tal:define="post options/post"
+		 class="post-${python:post.meta('type')} h-entry hentry
+				postpage"
+		 itemscope="itemscope" itemtype="http://schema.org/Article">
+    <!--! ${pheader.html_post_header()} -->
+    <div class="e-content entry-content" itemprop="articleBody text">
+    ${structure:options/post/text}
+    </div>
+    <aside class="postpromonav">
+    <nav>
+    <!--! ${helper.html_tags(post)} -->
+    <!--! ${helper.html_pager(post)} -->
+    </nav>
+    </aside>
+    <section class="comments hidden-print"
+			 tal:define="post options/post; site_has_comments options/site_has_comments"
+			 tal:condition="python: not post.meta('nocomments') and site_has_comments">
+        <h2>${python:options['messages']("Comments")}</h2>
+        ${python:options['comments'].comment_form(post.permalink(absolute=True), post.title(), post._base_path)}
+        </section>
+
+    <!--! ${math.math_scripts_ifpost(post)} -->
+</article>
+<!--! ${comments.comment_link_script()} -->
+</html>

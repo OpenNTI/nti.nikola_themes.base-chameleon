@@ -1,0 +1,110 @@
+<html metal:use-macro="context/@@base.tmpl/index/macros/base"
+	  xmlns:metal="http://xml.zope.org/namespaces/metal">
+
+<!-- <%inherit file="base.tmpl"/> -->
+<!-- <%namespace name="comments" file="comments_helper.tmpl"/> -->
+<!-- <%namespace name="ui" file="crumbs.tmpl" import="bar"/> -->
+<!-- <%block name="sourcelink"></%block> -->
+
+<metal:block metal:fill-slot="content">
+
+    <!--! ${ui.bar(crumbs)} -->
+    <h1 tal:condition="options/title" tal:content="options/title">Title</h1>
+
+    <p tal:condition="options/post" tal:content="structure:options/post/text">
+		Post text
+    </p>
+
+    <ul tal:condition="options/folders">
+    <!-- % for folder, ftitle in folders: -->
+        <li tal:repeat="folder options/folders">
+			<a href="${python:folder[0]}">
+				<i class="icon-folder-open"></i>&nbsp;
+				${python:folder[1]}
+			</a>
+		</li>
+    </ul>
+
+<div id="gallery_container"></div>
+
+<noscript tal:condition="options/photo_array">
+<ul class="thumbnails">
+	<li tal:repeat="image options/photo_array">
+        <a href="$image/url"
+		   class="thumbnail image-reference"
+		   title="image/title">
+			<img src="image/url_thumb" alt="image/title" />
+		</a>
+	</li>
+
+</ul>
+</noscript>
+
+<!--! %if site_has_comments and enable_comments: -->
+<!--!     ${comments.comment_form(None, permalink, title)} -->
+<!--! %endif -->
+</metal:block>
+
+<metal:block metal:fill-slot="extra_head">
+<link rel="alternate" type="application/rss+xml" title="RSS"
+	  href="rss.xml" />
+<style type="text/css">
+    .image-block {
+        display: inline-block;
+    }
+    .flowr_row {
+        width: 100%;
+    }
+    </style>
+<metal:block tal:condition="options/translations">
+	<link tal:repeat="langname options/translations/keys"
+        rel="alternate" hreflang="${langname}"
+		href="${python:options['_link']('gallery', options['gallery_path'], langname)}" />
+</metal:block>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml" />
+</metal:block>
+
+<metal:block metal:fill-slot="extra_js">
+<script src="/assets/js/flowr.js"></script>
+<script>
+jsonContent = ${photo_array_json};
+flowr(document.querySelectorAll("#gallery_container")[0], {
+        data : jsonContent,
+        height : ${thumbnail_size}*.6,
+        padding: 5,
+        rows: -1,
+        render : function(params) {
+            // Just return a div, string or a dom object, anything works fine
+            var img = document.createElement("img");
+            img.setAttribute('src', params.itemData.url_thumb);
+            img.setAttribute('width', params.width);
+            img.setAttribute('height', params.height);
+            img.setAttribute('alt', params.itemData.title);
+            img.style.maxWidth = '100%';
+            link = document.createElement("a");
+            link.setAttribute('href', params.itemData.url);
+            link.setAttribute('class', 'image-reference');
+            div = document.createElement("div");
+            div.setAttribute('class', 'image-block');
+            div.setAttribute('title', params.itemData.title);
+            div.setAttribute('data-toggle', "tooltip")
+            link.append(img);
+            div.append(link);
+            //div.hover(div.tooltip());
+            return div;
+        },
+        itemWidth : function(data) { return data.size.w; },
+        itemHeight : function(data) { return data.size.h; },
+        complete : function(params) {
+            if( jsonContent.length > params.renderedItems ) {
+                nextRenderList = jsonContent.slice( params.renderedItems );
+            }
+        }
+    });
+    baguetteBox.run('#gallery_container', {
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+</script>
+</metal:block>
+</html>

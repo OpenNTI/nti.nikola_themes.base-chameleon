@@ -1,0 +1,35 @@
+<html metal:use-macro="context/@@base.tmpl/index/macros/base"
+	  xmlns:metal="http://xml.zope.org/namespaces/metal">
+
+<div metal:fill-slot="content" id="${options/carousel_id}" class="carousel slide">
+    <ol class="carousel-indicators">
+		<tal:block repeat="slide options/slides_content">
+			<li tal:condition="repeat/slide/start"
+				data-target="#${options/carousel_id}"
+				data-slide-to="${repeat/slide/index}"
+				class="active" />
+			<li tal:condition="not:repeat/slide/start"
+				data-target="#${options/carousel_id}"
+				data-slide-to="${repeat/slide/index}"
+				/>
+		</tal:block>
+    </ol>
+    <div class="carousel-inner">
+		<tal:block repeat="image options/slides_content">
+			<div tal:condition="repeat/slide/start"
+                 class="item active">
+				<img src="${image}" alt=""
+					 style="margin: 0 auto 0
+							auto;" />
+			</div>
+			<div tal:condition="not:repeat/slide/start"
+                 class="item">
+				<img src="${image}" alt=""
+					 style="margin: 0 auto 0 auto;" />
+			</div>
+		</tal:block>
+    </div>
+    <a class="left carousel-control" href="#${options/carousel_id}" data-slide="prev">&lsaquo;</a>
+    <a class="right carousel-control" href="#${options/carousel_id}" data-slide="next">&rsaquo;</a>
+</div>
+</html>

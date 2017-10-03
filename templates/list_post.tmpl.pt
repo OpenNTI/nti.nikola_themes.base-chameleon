@@ -1,0 +1,34 @@
+<html metal:use-macro="context/@@base.tmpl/index/macros/base"
+	  xmlns:metal="http://xml.zope.org/namespaces/metal">
+
+<!-- <%inherit file="base.tmpl"/> -->
+<!-- <%namespace name="archive_nav" file="archive_navigation_helper.tmpl" import="*"/> -->
+<!-- <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
+
+<metal:block metal:fill-slot="extra_head">
+    <!--! ${feeds_translations.head(kind=kind, rss_override=False)} -->
+</metal:block>
+
+<article class="listpage" metal:fill-slot="content">
+    <header>
+        <h1>${options/title}</h1>
+    </header>
+    <!--! ${archive_nav.archive_navigation()} -->
+    <!--! ${feeds_translations.translation_link(kind)} -->
+    <ul tal:condition="options/posts" class="postlist">
+
+        <li tal:repeat="post options/posts">
+			<time class="listdate"
+				  datetime="${python:post.formatted_date('webiso')}"
+				  title="${python:post.formatted_date(options['date_format'])}">
+				${python:post.formatted_date(options['date_format'])}
+			</time>
+			<a href="${post/permalink}"
+			   class="listtitle">${post/title}</a>
+		</li>
+    </ul>
+    <p tal:condition="not:options/posts">${python:options['messages']("No posts found.")}</p>
+
+</article>
+
+</html>

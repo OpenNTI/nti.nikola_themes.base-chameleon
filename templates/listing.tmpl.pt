@@ -1,0 +1,31 @@
+<html metal:use-macro="context/@@base.tmpl/index/macros/base"
+	  xmlns:metal="http://xml.zope.org/namespaces/metal">
+
+
+<!-- <%namespace name="ui" file="crumbs.tmpl" import="bar"/> -->
+<!-- <%block name="content"> -->
+<metal:block metal:fill-slot="content">
+
+<!--! ${ui.bar(crumbs)} -->
+<ul tal:condition="options/folders|options/files">
+    <li tal:repeat="name options/folders">
+		<a href="${name}" class="listing-folder">${name}</a>
+	</li>
+    <li tal:repeat="name options/files">
+		<a href="${name}.html" class="listing-file">${name}</a>
+	</li>
+</ul>
+<metal:block tal:condition="options/code">
+    <h1>
+		${options/title}
+		<small tal:condition="options/source_link">
+			<a href="${options/source_link}">
+				(${python:options['messages']("Source")})
+			</a>
+		</small>
+    </h1>
+    ${structure:options/code}
+
+</metal:block>
+</metal:block>
+</html>

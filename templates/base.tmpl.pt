@@ -1,0 +1,25 @@
+<metal:block define-macro="base"><metal:block define-slot="doctype"><tal:doctype tal:replace="structure string:&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" /></metal:block>
+
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xml:lang="en"
+  lang="en"
+  i18n:domain="zope">
+
+  <head>
+    <title metal:define-slot="title" i18n:translate="">Title</title>
+
+    <metal:block define-slot="headers" />
+	<metal:block define-slot="extra_head" />
+    <metal:block define-slot="style_slot" />
+    <metal:block define-slot="ecmascript_slot" />
+
+    <link rel="icon" type="image/png"
+          tal:attributes="href context/++resource++favicon.png|default" />
+  </head>
+
+  <body metal:define-slot="content">
+
+</body>
+</html>
+</metal:block>

@@ -1,0 +1,43 @@
+<html metal:use-macro="context/@@base.tmpl/index/macros/base"
+	  xmlns:metal="http://xml.zope.org/namespaces/metal">
+<!-- <%inherit file="list_post.tmpl"/> -->
+<!-- <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
+
+<metal:block metal:fill-slot="extra_head">
+    <!--! ${feeds_translations.head(tag, kind, rss_override=False)} -->
+</metal:block>
+
+
+<article class="tagpage" metal:fill-slot="content">
+    <header>
+        <h1>${options/title}</h1>
+        <p tal:condition="options/description">${description}</p>
+		<tal:block tal:condition="options/subcategories|nothing">
+		<p tal:replace="python:options['messages']('Subcategories:')" />
+        <ul>
+			<li tal:repeat="cat options/subcategories">
+				<a href="${python:cat[1]}">${python:cat[0]}</a>
+			</li>
+
+        </ul>
+        </tal:block>
+        <div class="metadata">
+            <!--! ${feeds_translations.feed_link(tag, kind=kind)} -->
+        </div>
+        <!--! ${feeds_translations.translation_link(kind)} -->
+    </header>
+    %if posts:
+    <ul class="postlist" tal:condition="options/posts">
+        <li tal:repeat="post options/posts">
+			<time class="listdate"
+				  datetime="${python:post.formatted_date('webiso')}"
+				  title="${python:post.formatted_date(options['date_format'])}">
+				${python:post.formatted_date(options['date_format'])}
+			</time>
+			<a href="${post/permalink}"
+			   class="listtitle">${post/title}</a>
+		</li>
+
+    </ul>
+</article>
+</html>
