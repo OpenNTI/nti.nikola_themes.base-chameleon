@@ -1,0 +1,28 @@
+<!-- -*- mode: nxml -*- -->
+<configure	xmlns="http://namespaces.zope.org/zope"
+            xmlns:i18n="http://namespaces.zope.org/i18n"
+            xmlns:zcml="http://namespaces.zope.org/zcml"
+            xmlns:z3c="http://namespaces.zope.org/z3c">
+
+  <include package="z3c.macro" />
+  <include package="z3c.macro" file="meta.zcml" />
+
+  <z3c:macro name="open_graph_metadata"
+             for="nikola.post.Post"
+             view="*"
+             template="post_helper.pt"
+             layer="*" />
+
+  <z3c:macro name="html_tags"
+             for="nikola.post.Post"
+             view="*"
+             template="post_helper.pt"
+             layer="*" />
+
+  <z3c:macro name="html_pager"
+             for="nikola.post.Post"
+             view="*"
+             template="post_helper.pt"
+             layer="*" />
+
+</configure>

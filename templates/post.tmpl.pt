@@ -19,9 +19,10 @@
 			  title="${options/post/next_post/title}"
 			  type="text/html" />
 
-    <meta tal:condition="options/post/is_draft" name="robots" content="noindex" />
+    <meta tal:condition="options/post/is_draft" name="robots"
+          content="noindex" />
+    <metal:block use-macro="options/post/@@macros/open_graph_metadata" />
 <!--!
-    ${helper.open_graph_metadata(post)}
     ${helper.twitter_card_information(post)}
     ${helper.meta_translations(post)}
     ${math.math_styles_ifpost(post)}
@@ -40,8 +41,8 @@
     </div>
     <aside class="postpromonav">
     <nav>
-    <!--! ${helper.html_tags(post)} -->
-    <!--! ${helper.html_pager(post)} -->
+      <metal:block use-macro="post/@@macros/html_tags" />
+      <metal:block use-macro="post/@@macros/html_pager" />
     </nav>
     </aside>
     <section class="comments hidden-print"
