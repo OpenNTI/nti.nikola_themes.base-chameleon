@@ -3,38 +3,29 @@
 	  xmlns:metal="http://xml.zope.org/namespaces/metal">
 
 
-<!--! <%inherit file="list_post.tmpl"/> --> <!--! XXX: Using base. But
-                                            their templates don't seem
-                                            to do anything special in
-                                            this case anyway. -->
+<!--! <%inherit file="base.tmpl"/> -->
 <!--! <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
 
 <metal:block fill-slot="extra_head">
-    <!--! ${feeds_translations.head(author, kind, rss_override=False)} -->
+    <!--! ${feeds_translations.head(kind=kind, feeds=False)} -->
 </metal:block>
 
 <metal:block fill-slot="content">
-<article class="authorpage">
-    <header>
-        <h1>${options/title}</h1>
-        <p tal:condition="options/description" tal:content="options/description">
-          A Description
-        </p>
+<article class="authorindex"  tal:condition="options/items"
+         tal:define="messages nocall:options/messages">
+        <h2>${python:messages("Authors")}</h2>
         <div class="metadata">
-            <!--! ${feeds_translations.feed_link(author, kind)} -->
+            <!--! ${feeds_translations.translation_link(kind)} -->
         </div>
-    </header>
-
-    <ul class="postlist" tal:condition="options/posts">
-      <li tal:repeat="post options/posts" tal:define="date_format options/date_format">
-        <time class="listdate"
-              datetime="${python:post.formatted_date('webiso')}"
-              title="${python:post.formatted_date(date_format)}">${python:post.formatted_date(date_format)}</time>
-        <a href="${post/permalink}"
-           class="listtitle">${post/title}</a>
-      </li>
-    </ul>
+        <ul class="postlist"
+            tal:define="hidden_authors options/hidden_authors">
+          <li tal:repeat="text_link options/items"
+              tal:omit-tag="python:text_link[0] in hidden_authors">
+            <a class="reference listtitle"
+               tal:define="link python:text_link[1]; text python:text_link[0]"
+               href="${link}">${text}</a>
+          </li>
+        </ul>
 </article>
 </metal:block>
-
 </html>
