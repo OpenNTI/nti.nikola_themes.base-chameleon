@@ -12,7 +12,7 @@ Also dropping translation support.
 
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# "
       vocab="http://ogp.me/ns"
-	  lang="options/lang">
+	  lang="${options/lang}">
 
   <head metal:use-macro="macro:html_headstart" />
 

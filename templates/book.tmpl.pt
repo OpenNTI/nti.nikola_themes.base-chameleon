@@ -95,7 +95,7 @@
 
 <metal:block metal:fill-slot="extra_js">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Flowtype.js/1.1.0/flowtype.min.js"></script>
-    <script><![CDATA[
+    <script>
         $('#scrolling-cont').flowtype({
             minimum: 500,
             maximum: 1200,
@@ -117,7 +117,6 @@
                 }, 500)
             });
         });
-		]]>
     </script>
 </metal:block>
 

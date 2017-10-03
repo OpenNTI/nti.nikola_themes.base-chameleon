@@ -1,5 +1,6 @@
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
-	  xmlns:metal="http://xml.zope.org/namespaces/metal">
+	  xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal">
 
 <!-- <%inherit file="base.tmpl"/> -->
 <!-- <%namespace name="comments" file="comments_helper.tmpl"/> -->
@@ -8,34 +9,33 @@
 
 <metal:block metal:fill-slot="content">
 
-    <!--! ${ui.bar(crumbs)} -->
+	<nav metal:use-macro="macro:breadcrumbbar" />
     <h1 tal:condition="options/title" tal:content="options/title">Title</h1>
 
     <p tal:condition="options/post" tal:content="structure:options/post/text">
-		Post text
+        Post text
     </p>
 
     <ul tal:condition="options/folders">
-    <!-- % for folder, ftitle in folders: -->
         <li tal:repeat="folder options/folders">
-			<a href="${python:folder[0]}">
-				<i class="icon-folder-open"></i>&nbsp;
-				${python:folder[1]}
-			</a>
-		</li>
+            <a href="${python:folder[0]}">
+                <i class="icon-folder-open"></i>&nbsp;
+                ${python:folder[1]}
+            </a>
+        </li>
     </ul>
 
 <div id="gallery_container"></div>
 
 <noscript tal:condition="options/photo_array">
 <ul class="thumbnails">
-	<li tal:repeat="image options/photo_array">
+    <li tal:repeat="image options/photo_array">
         <a href="$image/url"
-		   class="thumbnail image-reference"
-		   title="image/title">
-			<img src="image/url_thumb" alt="image/title" />
-		</a>
-	</li>
+           class="thumbnail image-reference"
+           title="image/title">
+            <img src="image/url_thumb" alt="image/title" />
+        </a>
+    </li>
 
 </ul>
 </noscript>
@@ -47,7 +47,7 @@
 
 <metal:block metal:fill-slot="extra_head">
 <link rel="alternate" type="application/rss+xml" title="RSS"
-	  href="rss.xml" />
+      href="rss.xml" />
 <style type="text/css">
     .image-block {
         display: inline-block;
@@ -57,9 +57,9 @@
     }
     </style>
 <metal:block tal:condition="options/translations">
-	<link tal:repeat="langname options/translations/keys"
+    <link tal:repeat="langname options/translations/keys"
         rel="alternate" hreflang="${langname}"
-		href="${python:options['_link']('gallery', options['gallery_path'], langname)}" />
+        href="${python:options['_link']('gallery', options['gallery_path'], langname)}" />
 </metal:block>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml" />
 </metal:block>
