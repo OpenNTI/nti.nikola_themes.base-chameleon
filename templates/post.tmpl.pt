@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
 	  xmlns:metal="http://xml.zope.org/namespaces/metal">
 

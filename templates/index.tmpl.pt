@@ -1,5 +1,5 @@
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
-	  xmlns:metal="http://xml.zope.org/namespaces/metal">
+      xmlns:metal="http://xml.zope.org/namespaces/metal">
 
 <!-- <%namespace name="helper" file="index_helper.tmpl"/> -->
 <!-- <%namespace name="math" file="math_helper.tmpl"/> -->
@@ -9,70 +9,73 @@
 <!-- <%inherit file="base.tmpl"/> -->
 
 <metal:block metal:fill-slot="extra_head">
-        <link
-			tal:define="posts options/posts; permalink options/permalink"
-			tal:condition="python: posts and (permalink == '/' or permalink == '/' + index_file)"
-			rel="prefetch"
-			href="${python:options['posts'][0].permalink()}" type="text/html" />
-    <!--! ${math.math_styles_ifposts(posts)} -->
+    <link
+        tal:define="posts options/posts; permalink options/permalink"
+        tal:condition="python: posts and (permalink == '/' or permalink == '/' + index_file)"
+        rel="prefetch"
+        href="${python:options['posts'][0].permalink()}"
+        type="text/html" />
+    <metal:block metal:use-macro="macro:math_styles_ifposts" />
 </metal:block>
 
 <metal:block metal:fill-slot="content">
-<metal:block metal:fill-slot="content_header">
+    <metal:block metal:fill-slot="content_header">
     <!--! ${feeds_translations.translation_link(kind)} -->
-</metal:block>
-% if 'main_index' in pagekind:
-    <!--! ${front_index_header} -->
-% endif
-% if page_links:
-    <!--! ${pagination.page_navigation(current_page, page_links, prevlink, nextlink, prev_next_links_reversed)} -->
-% endif
-<div class="postindex">
-    <article tal:repeat="post options/posts"
-			 class="h-entry post-${python:post.meta('type')}">
-    <header>
-        <h1 class="p-name entry-title"><a href="${post/permalink}" class="u-url">${post/title}</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                <a tal:condition="options/author_pages_generated"
-				   href="${python:options['_link']('author', post.author())}">
-					${post/author}
-				</a>
-				<a tal:condition="not:options/author_pages_generated"
-				   tal:replace="post/author" />
-            </span></p>
-            <p class="dateline">
-				<a href="${post/permalink}" rel="bookmark">
-					<time class="published dt-published"
-						  datetime="${python:post.formatted_date('webiso')}"
-						  title="${python:post.formatted_date(options['date_format'])}">
-						${python:post.formatted_date(options['date_format'])}
-					</time>
-			</a></p>
-            % if not post.meta('nocomments') and site_has_comments:
-                <!--! <p class="commentline">${comments.comment_link(post.permalink(), post._base_path)}</p> -->
-            % endif
-        </div>
-    </header>
+    </metal:block>
+    <tal:block tal:replace="options/front_index_header"
+               tal:condition="python: 'main_index' in options['pagekind']" />
 
-    <div tal:condition="options/index_teasers"
-		 class="p-summary entry-summary"
-		 tal:content="structure:python:post.text(teaser_only=True)">
-	</div>
+    <metal:block use-macro="macro:page_navigation"
+                 tal:condition="options/page_links|nothing" />
+    <div class="postindex">
+        <article tal:repeat="post options/posts"
+                 class="h-entry post-${python:post.meta('type')}">
+            <header>
+                <h1 class="p-name entry-title"><a href="${post/permalink}" class="u-url">${post/title}</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        <a tal:condition="options/author_pages_generated"
+                           href="${python:options['_link']('author', post.author())}">
+                            ${post/author}
+                        </a>
+                        <a tal:condition="not:options/author_pages_generated"
+                           tal:replace="post/author" />
+                    </span></p>
+                    <p class="dateline">
+                        <a href="${post/permalink}" rel="bookmark">
+                            <time class="published dt-published"
+                                  datetime="${python:post.formatted_date('webiso')}"
+                                  title="${python:post.formatted_date(options['date_format'])}">
+                                ${python:post.formatted_date(options['date_format'])}
+                            </time>
+                    </a></p>
+                    <p class="commentline"
+                       tal:condition="python: not post.meta('nocomments') and options['site_has_comments']">
+                        ${comments.comment_link(post.permalink(), post._base_path)}
+                    </p>
+                </div>
+            </header>
 
-    <div tal:condition="not:options/index_teasers"
-		 class="e-content entry-content"
-		 tal:content="structure:python:post.text(teaser_only=False)">
+            <div tal:condition="options/index_teasers"
+                 class="p-summary entry-summary"
+                 tal:content="structure:python:post.text(teaser_only=True)">
+            </div>
+
+            <div tal:condition="not:options/index_teasers"
+                 class="e-content entry-content"
+                 tal:content="structure:python:post.text(teaser_only=False)">
+            </div>
+
+
+        </article>
+
     </div>
 
+    <metal:block metal:use-macro="macro:html_pager" />
+    <metal:block metal:use-macro="macro:math_scripts_ifposts" />
+    <metal:block metal:use-macro="macro:comment_link_script"
+                 tal:condition="options/site_has_comments" />
 
-    </article>
-% endfor
-</div>
-<!--!
-${helper.html_pager()}
-${comments.comment_link_script()}
-${math.math_scripts_ifposts(posts)}
--->
 </metal:block>
+
 </html>

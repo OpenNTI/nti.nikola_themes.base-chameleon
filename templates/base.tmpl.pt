@@ -1,25 +1,48 @@
-<metal:block define-macro="base"><metal:block define-slot="doctype"><tal:doctype tal:replace="structure string:&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" /></metal:block>
+<metal:block xmlns:tal="http://xml.zope.org/namespaces/tal"
+			 xmlns:metal="http://xml.zope.org/namespaces/metal"
+			 xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+			 define-macro="base">
+	<metal:block define-slot="doctype"><tal:doctype tal:replace="structure string:&lt;!DOCTYPE html &gt;" /></metal:block>
 
-<html
-  xmlns="http://www.w3.org/1999/xhtml"
-  xml:lang="en"
-  lang="en"
-  i18n:domain="zope">
+<!--!
+Note that we're hardcoding to use_open_graph with twitter cards.
+Not also that we're dropping rtl support.
+Also dropping translation support.
+-->
 
-  <head>
-    <title metal:define-slot="title" i18n:translate="">Title</title>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# "
+      vocab="http://ogp.me/ns"
+	  lang="options/lang">
 
-    <metal:block define-slot="headers" />
-	<metal:block define-slot="extra_head" />
-    <metal:block define-slot="style_slot" />
-    <metal:block define-slot="ecmascript_slot" />
+  <head metal:use-macro="macro:html_headstart" />
 
-    <link rel="icon" type="image/png"
-          tal:attributes="href context/++resource++favicon.png|default" />
-  </head>
+  <body tal:define="messages nocall:options/messages">
+      <a href="#content" class="sr-only sr-only-focusable">${python:messages("Skip to main content")}</a>
+      <div id="container">
+		  <metal:block metal:use-macro="macro:html_header" />
+          <main id="content">
+			  <div metal:define-slot="content" />
+          </main>
+         <!--! ${footer.html_footer()} -->
+      </div>
+	  <div metal:use-macro="macro:late_load_js" />
 
-  <body metal:define-slot="content">
 
+    <script
+		src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.2/baguetteBox.min.js"
+		tal:condition="options/use_cdn" />
+    <script src="/assets/js/baguetteBox.min.js"
+			tal:condition="not:options/use_cdn" />
+
+	<div metal:define-slot="extra_js" />
+
+    <script>baguetteBox.run('a.reference', {
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});</script>
+    <!--! ${body_end} -->
+    <!--! ${template_hooks['body_end']()} -->
 </body>
+
 </html>
 </metal:block>
