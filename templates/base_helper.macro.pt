@@ -143,7 +143,7 @@ Also dropping translation support.
             tal:condition="options/use_cdn" />
       <link metal:use-macro="macro:html_stylesheets_non_bundled_nocdn"
             tal:condition="not:options/use_cdn" /
-      <link metal:use-macro="macro:html_stylesheets_non_bundled"
+      <link metal:use-macro="macro:html_stylesheets_nonbundled"
             />
 
         <link href="/assets/css/rst_base.css" rel="stylesheet"
