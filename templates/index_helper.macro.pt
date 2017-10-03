@@ -1,0 +1,19 @@
+<metal:block xmlns:tal="http://xml.zope.org/namespaces/tal"
+			 xmlns:metal="http://xml.zope.org/namespaces/metal"
+			 xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+			 define-macro="html_pager">
+    <nav class="postindexpager"
+		 tal:condition="options/prevlink|options/nextlink">
+        <ul class="pager"
+			tal:define="messages options/messages">
+            <li class="previous"
+				tal:condition="options/prevlink">
+                <a href="${options/prevlink}" rel="prev">${python:messages("Newer posts")}</a>
+            </li>
+            <li class="next"
+				tal:condition="options/nextlink">
+                <a href="${nextlink}" rel="next">${python:messages("Older posts")}</a>
+            </li>
+        </ul>
+    </nav>
+</metal:block>
