@@ -12,7 +12,8 @@ Also dropping translation support.
 
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# "
       vocab="http://ogp.me/ns"
-	  lang="${options/lang}">
+	  tal:attributes="lang options/lang|nothing"
+	  lang="en">
 
   <head metal:use-macro="macro:html_headstart" />
 

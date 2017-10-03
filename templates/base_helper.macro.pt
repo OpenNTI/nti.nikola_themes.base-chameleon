@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <metal:block xmlns:tal="http://xml.zope.org/namespaces/tal"
 			 xmlns:metal="http://xml.zope.org/namespaces/metal"
 			 xmlns:i18n="http://xml.zope.org/namespaces/i18n">
@@ -13,11 +12,11 @@ Also dropping translation support.
 
 <head
     metal:define-macro="html_headstart"
-    tal:define="use_base_tag options/use_base_tag;
-                description options/description;
+    tal:define="use_base_tag options/use_base_tag|nothing;
+                description options/description|nothing;
                 abs_link nocall:options/abs_link;
-                permalink options/permalink;
-                title options/title;
+                permalink options/permalink|nothing;
+                title options/title|nothing;
                 blog_title options/blog_title;
                 prevlink options/prevlink|nothing;
                 nextlink options/nextlink|nothing;">
@@ -27,7 +26,7 @@ Also dropping translation support.
           tal:condition="use_base_tag" />
     <meta name="description" content="${description}"
           tal:condition="description" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title tal:condition="python:title==blog_title">${blog_title}</title>
     <title tal:condition="python:title!= blog_title">${title} | ${blog_title}</title>
@@ -62,14 +61,13 @@ Also dropping translation support.
           tal:condition="nextlink" />
 
     <tal:block tal:condition="options/use_cdn">
-        <!--[if lt IE 9]><script
-            src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script><![endif]-->
+        <!--[if lt IE 9]><script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     </tal:block>
     <tal:block tal:condition="not:options/use_cdn"
 			   tal:define="url_replacer nocall:options/url_replacer;
 						   lang options/lang;
 						   url_type options/url_type;">
-        <!--[if lt IE 9]><script src="${python:url_replacer(permalink, '/assets/js/html5shiv-printshiv.min.js', lang, url_type)}"></script><![endif]-->
+        <!--[if lt IE 9]><script src="${python:url_replacer(permalink, '/assets/js/html5.js', lang, url_type)}"></script><![endif]-->
     </tal:block>
 
     <!--! extra_head_data is a value set in config -->
@@ -114,23 +112,40 @@ Also dropping translation support.
     <tal:block tal:replace="structure: options/social_buttons_code" />
 </metal:block>
 
+<metal:block metal:define-macro="html_stylesheets_bundled_cdn">
+  <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.2/baguetteBox.min.css"
+      rel="stylesheet"
+      type="text/css"
+      />
+</metal:block>
+
+<metal:block metal:define-macro="html_stylesheets_nonbundled_cdn" />
+<metal:block metal:define-macro="html_stylesheets_nonbundled_nocdn" />
+<metal:block metal:define-macro="html_stylesheets_nonbundled" >
+  <link href="/assets/css/baguetteBox.min.css" rel="stylesheet"
+        type="text/css" />
+</metal:block>
+
 <metal:block metal:define-macro="html_stylesheets">
     <tal:block tal:condition="options/use_bundles">
-        <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.2/baguetteBox.min.css"
-            rel="stylesheet"
+      <link metal:use-macro="macro:html_stylesheets_bundled_cdn"
+            tal:condition="options/use_cdn" />
+      <link href="/assets/css/all.css" rel="stylesheet"
             type="text/css"
             tal:condition="options/use_cdn"/>
-        <link href="/assets/css/all.css" rel="stylesheet"
-              type="text/css"
-              tal:condition="options/use_cdn"/>
-        <link href="/assets/css/all-nocdn.css" rel="stylesheet"
-              type="text/css"
-              tal:condition="not:options/use_cdn"/>
+      <link href="/assets/css/all-nocdn.css" rel="stylesheet"
+            type="text/css"
+            tal:condition="not:options/use_cdn"/>
     </tal:block>
     <tal:block tal:condition="not:options/use_bundles">
-        <link href="/assets/css/baguetteBox.min.css" rel="stylesheet"
-              type="text/css" />
+      <link metal:use-macro="macro:html_stylesheets_non_bundled_cdn"
+            tal:condition="options/use_cdn" />
+      <link metal:use-macro="macro:html_stylesheets_non_bundled_nocdn"
+            tal:condition="not:options/use_cdn" /
+      <link metal:use-macro="macro:html_stylesheets_non_bundled"
+            />
+
         <link href="/assets/css/rst_base.css" rel="stylesheet"
               type="text/css" />
         <link href="/assets/css/nikola_rst.css" rel="stylesheet"

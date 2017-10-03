@@ -1,7 +1,10 @@
-<html metal:use-macro="context/@@base.tmpl/index/macros/base"
-	  xmlns:metal="http://xml.zope.org/namespaces/metal">
-
-<div metal:fill-slot="content" id="${options/carousel_id}" class="carousel slide">
+<div id="${options/carousel_id}"
+	 class="carousel slide"
+	 xmlns:metal="http://xml.zope.org/namespaces/metal">
+	<!--!
+		NOTE: This is just a content fragment, not an entire HTML
+		page, but it is called directly, not as a macro.
+	-->
     <ol class="carousel-indicators">
 		<tal:block repeat="slide options/slides_content">
 			<li tal:condition="repeat/slide/start"
@@ -32,4 +35,3 @@
     <a class="left carousel-control" href="#${options/carousel_id}" data-slide="prev">&lsaquo;</a>
     <a class="right carousel-control" href="#${options/carousel_id}" data-slide="next">&rsaquo;</a>
 </div>
-</html>
