@@ -23,7 +23,7 @@ Also dropping translation support.
           <main id="content">
 			  <div metal:define-slot="content" />
           </main>
-         <!--! ${footer.html_footer()} -->
+		  <metal:block metal:use-macro="macro:html_footer" />
       </div>
 	  <div metal:use-macro="macro:late_load_js" />
 
