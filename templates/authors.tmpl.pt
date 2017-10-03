@@ -7,7 +7,9 @@
 <!--! <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
 
 <metal:block fill-slot="extra_head">
-    <!--! ${feeds_translations.head(kind=kind, feeds=False)} -->
+  <tal:block
+      tal:replace="python:request.feed_translations_head(kind=options.get('kind'),
+                   feeds=False)" />
 </metal:block>
 
 <metal:block fill-slot="content">

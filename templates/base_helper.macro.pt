@@ -37,7 +37,11 @@ Also dropping translation support.
     <meta name="generator" content="Nikola (getnikola.com)"
           tal:condition="options/meta_generator_tag" />
 
-    <!--! ${feeds_translations.head(classification=None, kind='index', other=False)} -->
+    <tal:block
+        tal:replace="structure python:request.feed_translations_head(classification=None,
+                     kind='index',
+                     other=False)" />
+
     <link rel="canonical" href="${python:abs_link(permalink)}" />
 
 	<tal:block tal:condition="options/favicons"
@@ -120,9 +124,9 @@ Also dropping translation support.
       />
 </metal:block>
 
-<metal:block metal:define-macro="html_stylesheets_nonbundled_cdn" />
-<metal:block metal:define-macro="html_stylesheets_nonbundled_nocdn" />
-<metal:block metal:define-macro="html_stylesheets_nonbundled" >
+<metal:block metal:define-macro="html_stylesheets_non_bundled_cdn" />
+<metal:block metal:define-macro="html_stylesheets_non_bundled_nocdn" />
+<metal:block metal:define-macro="html_stylesheets_non_bundled" >
   <link href="/assets/css/baguetteBox.min.css" rel="stylesheet"
         type="text/css" />
 </metal:block>
@@ -142,8 +146,8 @@ Also dropping translation support.
       <link metal:use-macro="macro:html_stylesheets_non_bundled_cdn"
             tal:condition="options/use_cdn" />
       <link metal:use-macro="macro:html_stylesheets_non_bundled_nocdn"
-            tal:condition="not:options/use_cdn" /
-      <link metal:use-macro="macro:html_stylesheets_nonbundled"
+            tal:condition="not:options/use_cdn" />
+      <link metal:use-macro="macro:html_stylesheets_non_bundled"
             />
 
         <link href="/assets/css/rst_base.css" rel="stylesheet"
