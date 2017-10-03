@@ -19,28 +19,22 @@ Also dropping translation support.
 
   <body tal:define="messages nocall:options/messages">
       <a href="#content" class="sr-only sr-only-focusable">${python:messages("Skip to main content")}</a>
-      <div id="container">
-		  <metal:block metal:use-macro="macro:html_header" />
-          <main id="content">
-			  <div metal:define-slot="content" />
-          </main>
-		  <metal:block metal:use-macro="macro:html_footer" />
+      <metal:block metal:use-macro="macro:html_nav_menu" />
+      <div class="container" id="content" role="main">
+        <div class="body-content">
+          <div class="row">
+		    <metal:block metal:use-macro="macro:html_header" />
+		    <div metal:define-slot="content" ></div>
+            <metal:block metal:use-macro="macro:html_footer" />
+          </div>
+        </div>
       </div>
 	  <div metal:use-macro="macro:late_load_js" />
 
 
-    <script
-		src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.2/baguetteBox.min.js"
-		tal:condition="options/use_cdn" />
-    <script src="/assets/js/baguetteBox.min.js"
-			tal:condition="not:options/use_cdn" />
-
-	<div metal:define-slot="extra_js" />
-
-    <script>baguetteBox.run('a.reference', {
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});</script>
+      <div metal:use-macro="macro:base_extra_js" />
+	  <div metal:define-slot="extra_js" />
+      <script metal:use-macro="macro:base_end_js" />
     <!--! ${body_end} -->
     <!--! ${template_hooks['body_end']()} -->
 </body>
