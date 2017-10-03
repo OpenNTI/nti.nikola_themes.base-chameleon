@@ -25,4 +25,10 @@
              template="post_helper.pt"
              layer="*" />
 
+  <z3c:macro name="twitter_card_information"
+             for="nikola.post.Post"
+             view="*"
+             template="post_helper.pt"
+             layer="*" />
+
 </configure>

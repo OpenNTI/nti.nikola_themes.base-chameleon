@@ -61,6 +61,27 @@
   </ul>
 </metal:block>
 
+<metal:block metal:define-macro="twitter_card_information"
+             tal:define="twitter_card options/twitter_card">
+  <tal:block tal:condition="twitter_card/use_twitter_cards|nothing">
+    <meta name="twitter:card"
+          content="${twitter_card/card|string:summary}" />
+      <meta name="twitter:site:id"
+          content="${python:twitter_card['site:id']}"
+          tal:condition="python:'site_id' in twitter_card" />
+
+    <meta name="twitter:site" content="twitter_card/site"
+          tal:condition="twitter_card/site|nothing" />
+
+    <meta name="twitter:creator:id"
+          content="${python:twitter_card['creator:id']}"
+          tal:condition="python:'creator:id' in twitter_card" />
+
+    <meta name="twitter:creator"
+          content="twitter_card/creator"
+          tal:condition="twitter_card/creator|nothing" />
+  </tal:block>
+</metal:block>
 
 <!-- !
 <metal:block metal:define-macro="meta_translations(post)">
@@ -77,21 +98,7 @@
 
 
 
-<metal:block metal:define-macro="twitter_card_information(post)">
-%if twitter_card and twitter_card['use_twitter_cards']:
-    <meta name="twitter:card" content="${twitter_card.get('card', 'summary')|h}">
-    %if 'site:id' in twitter_card:
-    <meta name="twitter:site:id" content="${twitter_card['site:id']}">
-    %elif 'site' in twitter_card:
-    <meta name="twitter:site" content="${twitter_card['site']}">
-    %endif
-    %if 'creator:id' in twitter_card:
-    <meta name="twitter:creator:id" content="${twitter_card['creator:id']}">
-    %elif 'creator' in twitter_card:
-    <meta name="twitter:creator" content="${twitter_card['creator']}">
-    %endif
-%endif
-</metal:block>
+
 
 ### This function is deprecated; use math_helper directly.
 <metal:block metal:define-macro="mathjax_script(post)">
