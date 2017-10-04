@@ -19,13 +19,13 @@
     </ol>
     <div class="carousel-inner">
 		<tal:block repeat="image options/slides_content">
-			<div tal:condition="repeat/slide/start"
+			<div tal:condition="repeat/image/start"
                  class="item active">
 				<img src="${image}" alt=""
 					 style="margin: 0 auto 0
 							auto;" />
 			</div>
-			<div tal:condition="not:repeat/slide/start"
+			<div tal:condition="not:repeat/image/start"
                  class="item">
 				<img src="${image}" alt=""
 					 style="margin: 0 auto 0 auto;" />
