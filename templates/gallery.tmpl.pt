@@ -2,10 +2,10 @@
 	  xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal">
 
-<!-- <%inherit file="base.tmpl"/> -->
-<!-- <%namespace name="comments" file="comments_helper.tmpl"/> -->
-<!-- <%namespace name="ui" file="crumbs.tmpl" import="bar"/> -->
-<!-- <%block name="sourcelink"></%block> -->
+<!--! <%inherit file="base.tmpl"/> -->
+<!--! <%namespace name="comments" file="comments_helper.tmpl"/> -->
+<!--1 <%namespace name="ui" file="crumbs.tmpl" import="bar"/> -->
+<!--! <%block name="sourcelink"></%block> -->
 
 <metal:block metal:fill-slot="content">
 

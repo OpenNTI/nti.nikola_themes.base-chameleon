@@ -9,7 +9,7 @@
 <!-- <%inherit file="base.tmpl"/> -->
 
 <metal:block fill-slot="extra_head">
-    <meta tal:condition="python:options['post'].meta('keywords')" name="keywords" content="${python:post.meta('keywords')|h}" />
+    <meta tal:condition="python:options['post'].meta('keywords')" name="keywords" content="${python:post.meta('keywords')}" />
     <meta name="author" content="${options/post/author}" />
     <link tal:condition="options/post/prev_post"
 		  rel="prev" href="${options/post/prev_post/permalink}"
