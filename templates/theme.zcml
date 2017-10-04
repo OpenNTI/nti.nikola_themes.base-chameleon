@@ -38,5 +38,18 @@
              template="post_helper.pt"
              layer="*" />
 
+  <z3c:macro name="math_scripts_ifpost"
+             for="nikola.post.Post"
+             view="*"
+             template="math_helper.macro.pt"
+             layer="*" />
+
+  <z3c:macro name="math_styles_ifpost"
+             for="nikola.post.Post"
+             view="*"
+             template="math_helper.macro.pt"
+             layer="*" />
+
+
 
 </configure>

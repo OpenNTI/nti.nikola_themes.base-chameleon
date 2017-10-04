@@ -42,8 +42,11 @@
                          _link nocall:options/_link"
              >
     <ul itemprop="keywords" class="tags" tal:condition="post/tags">
-      <li tal:repeat="tag post/tags" tal:omit-tag="python:tag in hidden_tags">
-        <a class="tag p-category" href="${python:_link('tag', tag)}" rel="tag">${tag}</a></li>
+      <tal:block tal:repeat="tag post/tags">
+        <li tal:condition="python:tag not in hidden_tags">
+          <a class="tag p-category" href="${python:_link('tag', tag)}" rel="tag">${tag}</a>
+        </li>
+      </tal:block>
     </ul>
 </metal:block>
 
