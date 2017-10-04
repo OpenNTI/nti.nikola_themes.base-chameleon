@@ -10,7 +10,9 @@
 
 <metal:block metal:fill-slot="extra_head">
     <link
-        tal:define="posts options/posts; permalink options/permalink"
+        tal:define="posts options/posts;
+                    permalink options/permalink;
+                    index_file options/index_file|string:nothing"
         tal:condition="python: posts and (permalink == '/' or permalink == '/' + index_file)"
         rel="prefetch"
         href="${python:options['posts'][0].permalink()}"
