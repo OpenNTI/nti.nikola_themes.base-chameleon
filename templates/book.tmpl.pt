@@ -4,10 +4,14 @@
 <!-- <%namespace name="helper" file="post_helper.tmpl"/> -->
 <!-- <%namespace name="pheader" file="post_header.tmpl"/> -->
 <!-- <%namespace name="comments" file="comments_helper.tmpl"/> -->
-<!-- <%inherit file="post.tmpl"/> --> <!-- XXX post, not base. need
-										   macro -->
+<!-- <%inherit file="post.tmpl"/> -->
+
 
 <metal:block metal:fill-slot="extra_head">
+
+  <metal:block metal:use-macro="context/@@post.tmpl/index/macros/post_extra_head" />
+
+
     <link
 		href='https://fonts.googleapis.com/css?family=Gentium+Book+Basic'
 		rel='stylesheet' type='text/css' />

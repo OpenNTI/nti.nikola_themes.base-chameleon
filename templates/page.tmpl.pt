@@ -2,14 +2,16 @@
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
 	  xmlns:metal="http://xml.zope.org/namespaces/metal">
 
-<!-- <%inherit file="post.tmpl"/> --> <!-- XXX post, not base. need
-										   macro -->
+<!-- <%inherit file="post.tmpl"/> -->
 
 <!-- <%namespace name="helper" file="post_helper.tmpl"/> -->
 <!-- <%namespace name="pheader" file="post_header.tmpl"/> -->
 <!-- <%namespace name="comments" file="comments_helper.tmpl"/> -->
 <!-- <%namespace name="math" file="math_helper.tmpl"/> -->
 
+<metal:block fill-slot="extra_head">
+  <metal:block metal:use-macro="context/@@post.tmpl/index/macros/post_extra_head" />
+</metal:block>
 
 
 <article metal:fill-slot="content"
@@ -31,6 +33,7 @@
         ${python:options['comments'].comment_form(options['post'].permalink(absolute=True),
 		options['post'].title(), options['post'].base_path)}
     </section>
-    <!--! ${math.math_scripts_ifpost(post)} -->
+    <metal:block use-macro="options/post/@@macros/math_scripts_ifpost" />
+
 </article>
 </html>

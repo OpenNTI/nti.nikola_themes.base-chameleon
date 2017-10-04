@@ -5,15 +5,18 @@
 <!-- <%namespace name="archive_nav" file="archive_navigation_helper.tmpl" import="*"/> -->
 <!-- <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
 
-<metal:block metal:fill-slot="extra_head">
-    <!--! ${feeds_translations.head(kind=kind, rss_override=False)} -->
+<metal:block fill-slot="extra_head"
+             tal:define=" kind options/kind;">
+  <tal:block tal:replace="structure
+                          python:request.feed_translations_head(kind=kind, rss_override=False)" />
 </metal:block>
 
 <article class="listpage" metal:fill-slot="content">
     <header>
         <h1>${options/title}</h1>
     </header>
-    <!--! ${archive_nav.archive_navigation()} -->
+
+    <tal:block metal:use-macro="macro:archive_navigation" />
     <!--! ${feeds_translations.translation_link(kind)} -->
     <ul tal:condition="options/posts" class="postlist">
 

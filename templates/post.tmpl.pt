@@ -8,7 +8,7 @@
 <!-- <%namespace name="math" file="math_helper.tmpl"/> -->
 <!-- <%inherit file="base.tmpl"/> -->
 
-<metal:block fill-slot="extra_head">
+<metal:block metal:define-macro="post_extra_head">
     <meta tal:condition="python:options['post'].meta('keywords')" name="keywords" content="${python:post.meta('keywords')}" />
     <meta name="author" content="${options/post/author}" />
     <link tal:condition="options/post/prev_post"
@@ -25,6 +25,10 @@
     <metal:block use-macro="options/post/@@macros/twitter_card_information" />
     <metal:block use-macro="options/post/@@macros/meta_translations" />
     <metal:block use-macro="options/post/@@macros/math_styles_ifpost" />
+</metal:block>
+
+<metal:block fill-slot="extra_head">
+  <metal:block metal:use-macro="template/macros/post_extra_head" />
 </metal:block>
 
 
