@@ -1,10 +1,12 @@
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
 	  xmlns:metal="http://xml.zope.org/namespaces/metal">
-<!-- <%inherit file="list_post.tmpl"/> -->
+<!-- <%inherit file="list_post.tmpl"/> --> <!-- doesn't seem to matter -->
 <!-- <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
 
-<metal:block metal:fill-slot="extra_head">
-    <!--! ${feeds_translations.head(tag, kind, rss_override=False)} -->
+<metal:block metal:fill-slot="extra_head"
+             tal:define="kind options/kind; tag options/tag;">
+  <metal:block tal:replace="structure python:request.feed_translations_head(tag,
+                            kind, rss_override=False)"/>
 </metal:block>
 
 
@@ -21,12 +23,13 @@
 
         </ul>
         </tal:block>
-        <div class="metadata">
-            <!--! ${feeds_translations.feed_link(tag, kind=kind)} -->
+        <div class="metadata"
+             tal:define="tag options/tag;
+                         kind options/kind;"
+             tal:content="structure python:request.feed_link(tag, kind=kind)">
         </div>
         <!--! ${feeds_translations.translation_link(kind)} -->
     </header>
-    %if posts:
     <ul class="postlist" tal:condition="options/posts">
         <li tal:repeat="post options/posts">
 			<time class="listdate"
