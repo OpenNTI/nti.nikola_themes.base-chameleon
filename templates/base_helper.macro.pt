@@ -75,7 +75,8 @@ Also dropping translation support.
     </tal:block>
 
     <!--! extra_head_data is a value set in config -->
-    <tal:block tal:replace="structure:options/extra_head_data" />
+    <tal:block tal:replace="structure:options/extra_head_data"
+               tal:condition="options/extra_head_data"/>
 
     <!--! whereas extra_head is meant to be a macro slot -->
     <metal:block metal:define-slot="extra_head" />
