@@ -31,4 +31,12 @@
              template="post_helper.pt"
              layer="*" />
 
+
+  <z3c:macro name="meta_translations"
+             for="nikola.post.Post"
+             view="*"
+             template="post_helper.pt"
+             layer="*" />
+
+
 </configure>

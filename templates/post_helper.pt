@@ -83,20 +83,21 @@
   </tal:block>
 </metal:block>
 
-<!-- !
-<metal:block metal:define-macro="meta_translations(post)">
-    %if len(translations) > 1:
-        %for langname in sorted(translations):
-            %if langname != lang and ((not post.skip_untranslated) or post.is_translation_available(langname)):
-                <link rel="alternate" hreflang="${langname}" href="${post.permalink(langname)}">
-            %endif
-        %endfor
-    %endif
+<metal:block metal:define-macro="meta_translations"
+             tal:define="translations options/translations;
+                         post context;
+                         lang options/lang">
+  <tal:block tal:condition="python:len(translations) > 1">
+    <link tal:repeat="langname python:sorted(translations)"
+          tal:omit-tag="python:langname == lang or (not post.is_translation_available(langname) and post.skip_untranslated)"
+          rel="alternate"
+          hreflang="${langname}"
+          href="${python:post.permalink(langname)}" />
+  </tal:block>
 </metal:block>
 
 
-
-
+<!-- !
 
 
 
