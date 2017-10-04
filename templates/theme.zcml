@@ -50,6 +50,10 @@
              template="math_helper.macro.pt"
              layer="*" />
 
-
+  <z3c:macro name="post_html_translations"
+             for="nikola.post.Post"
+             view="*"
+             template="post_header.macro.pt"
+             layer="*" />
 
 </configure>

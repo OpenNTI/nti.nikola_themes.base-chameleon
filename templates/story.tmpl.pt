@@ -18,9 +18,8 @@
 		 itemscope="itemscope"
 		 itemtype="http://schema.org/Article">
     <header>
-<!--!        ${pheader.html_title()}
-        ${pheader.html_translations(post)}
--->
+      <metal:block metal:use-macro="macro:html_title" />
+      <metal:block metal:use-macro="options/post/@@macros/post_html_translations" />
     </header>
     <div class="e-content entry-content" itemprop="articleBody text">
     ${structure:options/post/text}

@@ -37,7 +37,7 @@
 		 class="post-${python:post.meta('type')} h-entry hentry
 				postpage"
 		 itemscope="itemscope" itemtype="http://schema.org/Article">
-    <!--! ${pheader.html_post_header()} -->
+  <metal:block metal:use-macro="macro:html_post_header" />
     <div class="e-content entry-content" itemprop="articleBody text">
     ${structure:options/post/text}
     </div>
