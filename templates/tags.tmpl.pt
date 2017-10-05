@@ -12,10 +12,19 @@
 
 <article class="tagindex"
          metal:fill-slot="content"
-         tal:define="cat_items options/items;
-                     items options/items;
+         tal:define="cat_items options/cat_items|nothing;
+                     items python:options.get('items');
                      messages nocall:options/messages;
                      hidden_tags options/hidden_tags">
+  <!--! we use options.get('items') because the default path_traverse
+      from z3c.pt.expressions will fallback to DefaultTraversable if
+      the key is not found in the dict. DT, in turn, first attempts
+      getattr(), which would locate the dict.items() method, which
+      path_traverse would then happily call, giving us the wrong thing.
+
+      A better fix is probably to register a custom Traversable for a
+      dict that doesn't do that.
+  -->
     <header>
         <h1>${options/title}</h1>
         <div class="metadata">
