@@ -45,7 +45,7 @@
                                    indent_levels python:cat[4];
                                    indent_change_before python:cat[5];
                                    indent_change_after python:cat[6];
-                                   ul_open string:&lt;ul class=&quot;postlist&quot;&gt;;
+                                   ul_open string:&lt;ul class=&quot;list-inline&quot;&gt;;
                                    ul_opens python:ul_open * indent_change_before;
                                    li_open string:&lt;li&gt;;
                                    li_close string:&lt;/li&gt;;
@@ -53,7 +53,8 @@
                                    ">
                 <tal:block tal:content="structure:ul_opens" />
 
-                <tal:block tal:content="structure:li_open" /><a class="reference" href="${link}">${text}</a>
+                <tal:block tal:content="structure:li_open" />
+                <a class="reference badge" href="${link}">${text}</a>
                 <tal:block tal:condition="python:indent_change_after &lt;= 0">
                     <tal:block tal:content="structure:li_close" />
                 </tal:block>
@@ -69,11 +70,11 @@
 
         <h2 tal:condition="items">${python:messages("Tags")}</h2>
     </tal:block>
-    <ul class="postlist" tal:condition="items">
+    <ul class="list-inline" tal:condition="items">
         <tal:block tal:repeat="tl items">
             <tal:block tal:define="text python:tl[0]; link python:tl[1]">
                 <li tal:condition="python:text not in hidden_tags">
-                    <a class="reference listtitle" href="${link}">${text}</a>
+                    <a class="reference badge" href="${link}">${text}</a>
                 </li>
             </tal:block>
         </tal:block>

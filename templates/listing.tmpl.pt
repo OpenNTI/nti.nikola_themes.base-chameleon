@@ -9,10 +9,12 @@
 <nav metal:use-macro="macro:breadcrumbbar" />
 <ul tal:condition="options/folders|options/files">
     <li tal:repeat="name options/folders">
-		<a href="${name}" class="listing-folder">${name}</a>
+		<metal:block metal:use-macro="folder-open"/>
+        <a href="${name}" class="listing-folder">${name}</a>
 	</li>
     <li tal:repeat="name options/files">
-		<a href="${name}.html" class="listing-file">${name}</a>
+		<metal:block metal:use-macro="file"/>
+        <a href="${name}.html" class="listing-file">${name}</a>
 	</li>
 </ul>
 <metal:block tal:condition="options/code">
