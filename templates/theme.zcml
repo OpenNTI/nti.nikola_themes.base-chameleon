@@ -8,52 +8,68 @@
   <include package="z3c.macro" file="meta.zcml" />
 
   <z3c:macro name="open_graph_metadata"
-             for="nikola.post.Post"
+             for=".interfaces.IPost"
              view="*"
              template="post_helper.pt"
              layer="*" />
 
   <z3c:macro name="html_tags"
-             for="nikola.post.Post"
+             for=".interfaces.IPost"
              view="*"
              template="post_helper.pt"
              layer="*" />
 
   <z3c:macro name="html_pager"
-             for="nikola.post.Post"
+             for=".interfaces.IPost"
              view="*"
              template="post_helper.pt"
              layer="*" />
 
   <z3c:macro name="twitter_card_information"
-             for="nikola.post.Post"
+             for=".interfaces.IPost"
              view="*"
              template="post_helper.pt"
              layer="*" />
 
 
   <z3c:macro name="meta_translations"
-             for="nikola.post.Post"
+             for=".interfaces.IPost"
              view="*"
              template="post_helper.pt"
              layer="*" />
 
   <z3c:macro name="math_scripts_ifpost"
-             for="nikola.post.Post"
+             for=".interfaces.IPost"
              view="*"
              template="math_helper.macro.pt"
              layer="*" />
 
   <z3c:macro name="math_styles_ifpost"
-             for="nikola.post.Post"
+             for=".interfaces.IPost"
              view="*"
              template="math_helper.macro.pt"
              layer="*" />
 
   <z3c:macro name="post_html_translations"
-             for="nikola.post.Post"
+             for=".interfaces.IPost"
              view="*"
              template="post_header.macro.pt"
              layer="*" />
+
+  <z3c:macro name="archive_navigation"
+             macro="archive_navigation_IArchivePageKind"
+             for="*"
+             view="*"
+             template="archive_navigation_helper.macro.pt"
+             layer=".interfaces.IArchivePageKind"
+             />
+
+  <z3c:macro name="front_index_header"
+             macro="front_index_header_IMainIndexPageKind"
+             for="*"
+             view="*"
+             template="index.tmpl.pt"
+             layer=".interfaces.IMainIndexPageKind"
+             />
 
 </configure>

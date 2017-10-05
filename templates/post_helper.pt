@@ -54,7 +54,7 @@
              tal:define="post context;
                          messages nocall:options/messages">
   <ul class="pager hidden-print"
-      tal:condition="post/prev_post|post/next_post">
+      tal:condition="python:post.prev_post or post.next_post">
     <li class="previous" tal:condition="post/prev_post">
       <a href="${post/prev_post/permalink}" rel="prev" title="${post/prev_post/title}">${python:messages("Previous post")}</a>
     </li>

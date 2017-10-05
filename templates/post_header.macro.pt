@@ -5,7 +5,7 @@
 
 <metal:block metal:define-macro="html_title">
   <h1 class="p-name entry-title" itemprop="headline name"
-      tal:define="post options/post; title options/title"
+      tal:define="post context; title options/title"
       tal:condition="python:title and not post.meta('hidetitle')">
     <a href="${post/permalink}" class="u-url">${post/title}</a>
   </h1>
@@ -15,7 +15,7 @@
     <header
         tal:define="_link nocall:options/_link;
                     message nocall:options/messages;
-                    post options/post;
+                    post context;
                     date_format options/date_format;
                     site_has_comments options/site_has_comments">
         <metal:block metal:use-macro="macro:html_title" />
@@ -48,7 +48,7 @@
               <a href="${python:post.meta('link')}">${python:messages("Original site")}</a>
             </p>
         </div>
-        <metal:block metal:use-macro="post/@@macros/post_html_translations" />
+        <metal:block metal:use-macro="macro:post_html_translations" />
     </header>
 </metal:block>
 
@@ -71,7 +71,7 @@
 </metal:block>
 
 <metal:block metal:define-macro="html_sourcelink"
-             tal:define="post options/post;
+             tal:define="post context;
                          show_sourcelink options/show_sourcelink;
                          messages nocall:options/messages;">
 

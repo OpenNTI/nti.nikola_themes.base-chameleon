@@ -3,8 +3,12 @@
              xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
 
-<metal:block metal:define-macro="archive_navigation">
-  <nav tal:condition="python:'archive_page' in options['pagekind'] and options['has_archive_navigation']"
+<!-- default archive navigation does nothing -->
+<metal:block metal:define-macro="archive_navigation" />
+
+<!-- This is registered for IArchivePageKind -->
+<metal:block metal:define-macro="archive_navigation_IArchivePageKind" >
+  <nav tal:condition="options/has_archive_navigation"
        class="archivenav">
     <ul class="pager" tal:define="messages nocall:options/messages">
       <li class="previous"
