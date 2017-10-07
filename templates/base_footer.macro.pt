@@ -11,3 +11,5 @@
             <!--! ${template_hooks['page_footer']()} -->
     </footer>
 </metal:block>
+
+</metal:block>

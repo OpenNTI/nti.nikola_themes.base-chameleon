@@ -24,7 +24,7 @@
 		 class="post-${python:context.meta('type')} storypage"
 		 itemscope="itemscope"
 		 itemtype="http://schema.org/Article">
-  <metal:block metal:use-macro="html_page_header" />
+  <metal:block metal:use-macro="macro:html_page_header" />
     <div class="e-content entry-content" itemprop="articleBody text">
     ${structure:options/post/text}
     </div>
