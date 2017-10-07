@@ -131,6 +131,7 @@ Also dropping translation support.
   <link href="/assets/css/baguetteBox.min.css" rel="stylesheet"
         type="text/css" />
 </metal:block>
+<metal:block metal:define-macro="html_stylesheets_extensions" />
 
 <metal:block metal:define-macro="html_stylesheets">
     <tal:block tal:condition="options/use_bundles">
@@ -169,6 +170,10 @@ Also dropping translation support.
         <link href="/assets/css/nikola_ipython.css" rel="stylesheet"
               type="text/css" />
     </tal:block>
+
+    <link href="assets/another.css"
+          metal:use-macro="macro:html_stylesheets_extensions" />
+
 </metal:block>
 
 <metal:block metal:define-macro="html_translations">

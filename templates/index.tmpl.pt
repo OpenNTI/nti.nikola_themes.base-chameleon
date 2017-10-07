@@ -1,12 +1,12 @@
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
       xmlns:metal="http://xml.zope.org/namespaces/metal">
 
-<!-- <%namespace name="helper" file="index_helper.tmpl"/> -->
-<!-- <%namespace name="math" file="math_helper.tmpl"/> -->
-<!-- <%namespace name="comments" file="comments_helper.tmpl"/> -->
-<!-- <%namespace name="pagination" file="pagination_helper.tmpl"/> -->
-<!-- <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
-<!-- <%inherit file="base.tmpl"/> -->
+<!--! <%namespace name="helper" file="index_helper.tmpl"/> -->
+<!--! <%namespace name="math" file="math_helper.tmpl"/> -->
+<!--! <%namespace name="comments" file="comments_helper.tmpl"/> -->
+<!--! <%namespace name="pagination" file="pagination_helper.tmpl"/> -->
+<!--! <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
+<!--! <%inherit file="base.tmpl"/> -->
 
 <metal:block metal:fill-slot="extra_head">
     <link
@@ -35,15 +35,21 @@
 
     <metal:block use-macro="macro:page_navigation"
                  tal:condition="options/page_links|nothing" />
-    <div class="postindex">
-        <article tal:repeat="post options/posts"
-                 class="h-entry post-${python:post.meta('type')}">
-            <header>
-                <h1 class="p-name entry-title"><a href="${post/permalink}" class="u-url">${post/title}</a></h1>
-                <div class="metadata">
+    <div class="postindex"
+         tal:define="index_teasers options/index_teasers;
+                     _link nocall:options/_link">
+      <tal:block tal:repeat="post options/posts">
+        <article
+                 class="h-entry post-${post/meta:type}
+                        ${python:'post-preview' if index_teasers else ''}">
+                <a href="${post/permalink}" class="u-url">
+                  <h1 class="p-name entry-title
+                             post-title">${post/title}</h1>
+                </a>
+                <div class="metadata post-meta">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         <a tal:condition="options/author_pages_generated"
-                           href="${python:options['_link']('author', post.author())}">
+                           href="${python:_link('author', post.author())}">
                             ${post/author}
                         </a>
                         <a tal:condition="not:options/author_pages_generated"
@@ -62,21 +68,21 @@
                         ${comments.comment_link(post.permalink(), post._base_path)}
                     </p>
                 </div>
-            </header>
 
-            <div tal:condition="options/index_teasers"
+            <div tal:condition="index_teasers"
                  class="p-summary entry-summary"
                  tal:content="structure:python:post.text(teaser_only=True)">
             </div>
 
-            <div tal:condition="not:options/index_teasers"
+            <div tal:condition="not:index_teasers"
                  class="e-content entry-content"
                  tal:content="structure:python:post.text(teaser_only=False)">
             </div>
 
 
         </article>
-
+        <hr />
+      </tal:block>
     </div>
 
     <metal:block metal:use-macro="macro:html_pager" />

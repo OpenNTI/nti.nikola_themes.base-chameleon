@@ -11,44 +11,50 @@
   </h1>
 </metal:block>
 
-<metal:block metal:define-macro="html_post_header">
-    <header
+<metal:block metal:define-macro="html_post_title_author_meta"
         tal:define="_link nocall:options/_link;
                     message nocall:options/messages;
                     post context;
                     date_format options/date_format;
                     site_has_comments options/site_has_comments">
-        <metal:block metal:use-macro="macro:html_title" />
-        <div class="metadata">
-            <p class="byline author vcard">
-              <span class="byline-name fn" itemprop="author">
-                <a href="${python:_link('author', post.author())}"
-                   tal:omit-tag="not:options/author_pages_generated">
-                  ${post/author}
-                </a>
-              </span>
-            </p>
-            <p class="dateline">
-              <a href="${post/permalink}" rel="bookmark">
-                <time class="published dt-published"
-                      datetime="${python:post.formatted_date('webiso')}"
-                      itemprop="datePublished"
-                      title="${python:post.formatted_date(date_format)}">
-                  ${python:post.formatted_date(date_format)}
-                </time>
-              </a>
-            </p>
-            <p class="commentline"
-               tal:condition="python:not post.meta('nocomments') and site_has_comments">
-              ${comments.comment_link(post.permalink(), post._base_path)}
-            </p>
-            <metal:block metal:use-macro="macro:html_sourcelink" />
-            <p class="linkline"
-               tal:condition="python:post.meta('link')">
-              <a href="${python:post.meta('link')}">${python:messages("Original site")}</a>
-            </p>
-        </div>
-        <metal:block metal:use-macro="macro:post_html_translations" />
+
+
+  <metal:block metal:use-macro="macro:html_title" />
+  <div class="metadata meta">
+    <p class="byline author vcard">
+      <span class="byline-name fn" itemprop="author">
+        <a href="${python:_link('author', post.author())}"
+           tal:omit-tag="not:options/author_pages_generated">
+          ${post/author}
+        </a>
+      </span>
+    </p>
+    <p class="dateline">
+      <a href="${post/permalink}" rel="bookmark">
+        <time class="published dt-published"
+              datetime="${python:post.formatted_date('webiso')}"
+              itemprop="datePublished"
+              title="${python:post.formatted_date(date_format)}">
+          ${python:post.formatted_date(date_format)}
+        </time>
+      </a>
+    </p>
+    <p class="commentline"
+       tal:condition="python:not post.meta('nocomments') and site_has_comments">
+      ${comments.comment_link(post.permalink(), post._base_path)}
+    </p>
+    <metal:block metal:use-macro="macro:html_sourcelink" />
+    <p class="linkline"
+       tal:condition="python:post.meta('link')">
+      <a href="${python:post.meta('link')}">${python:messages("Original site")}</a>
+    </p>
+  </div>
+</metal:block>
+
+<metal:block metal:define-macro="html_post_header">
+    <header class="intro-header">
+      <metal:block metal:use-macro="macro:html_post_title_author_meta" />
+      <metal:block metal:use-macro="macro:post_html_translations" />
     </header>
 </metal:block>
 

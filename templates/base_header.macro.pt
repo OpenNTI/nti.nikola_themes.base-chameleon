@@ -17,6 +17,8 @@
     <!--! ${template_hooks['page_header']()} -->
 </metal:block>
 
+<metal:block metal:define-macro="html_page_header" />
+
 <metal:block metal:define-macro="html_site_title"
 			 tal:define="abs_link nocall:options/abs_link;
 						 _link nocall:options/_link;
