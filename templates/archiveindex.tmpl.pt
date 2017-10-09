@@ -1,0 +1,36 @@
+<html metal:use-macro="context/@@base.tmpl/index/macros/base"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal">
+<!--!
+## -*- coding: utf-8 -*-
+<%inherit file="index.tmpl"/>
+<%namespace name="archive_nav" file="archive_navigation_helper.tmpl" import="*"/>
+<%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/>
+
+<%block name="extra_head">
+    ${parent.extra_head()}
+    ${feeds_translations.head(archive_name)}
+</%block>
+
+<%block name="content_header">
+    ${archive_nav.archive_navigation()}
+    ${parent.content_header()}
+</%block>
+-->
+<metal:block metal:fill-slot="extra_head">
+    <metal:block metal:use-macro="context/@@index.tmpl/index/macros/index_extra_head" />
+    ${structure:python:request.feed_translations_head(options['archive_name'])}
+</metal:block>
+
+
+<metal:block metal:fill-slot="content">
+    <metal:block
+        metal:use-macro="context/@@index.tmpl/index/macros/content_macro"
+        >
+        <metal:block metal:fill-slot="content_content_header">
+            <metal:block metal:use-macro="macro:archive_navigation" />
+        </metal:block>
+    </metal:block>
+</metal:block>
+
+</html>

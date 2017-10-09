@@ -4,7 +4,7 @@
 
 <!--! <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
 
-<metal:block metal:fill-slot="extra_head">
+<metal:block metal:define-macro="index_extra_head">
     <link
         tal:define="posts options/posts;
                     permalink options/permalink;
@@ -16,16 +16,19 @@
     <metal:block metal:use-macro="macro:math_styles_ifposts" />
 </metal:block>
 
+<metal:block metal:fill-slot="extra_head">
+    <metal:block metal:use-macro="template/index_extra_head" />
+</metal:block>
+
 
 <!-- This is registered for IMainIndexPageKind -->
 <metal:block define-macro="front_index_header_IMainIndexPageKind">
     <h1 tal:replace="structure:options/front_index_header" />
 </metal:block>
 
-<metal:block metal:fill-slot="content">
-    <metal:block metal:fill-slot="content_header">
-    <!--! ${feeds_translations.translation_link(kind)} -->
-    </metal:block>
+
+<metal:block metal:define-macro="content_macro">
+    <metal:block metal:define-slot="content_content_header" />
 
     <h1 metal:use-macro="macro:front_index_header" />
 
@@ -82,6 +85,10 @@
     <metal:block metal:use-macro="macro:math_scripts_ifposts" />
 
 
+</metal:block>
+
+<metal:block metal:fill-slot="content">
+    <metal:block metal:use-macro="template/content_macro" />
 </metal:block>
 
 </html>
