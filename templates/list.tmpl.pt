@@ -1,6 +1,7 @@
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
 >
 <!-- <%namespace name="archive_nav" file="archive_navigation_helper.tmpl" import="*"/> -->
 <!-- <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
@@ -28,8 +29,8 @@
 			<span tal:condition="python:item[2]">(${python:item[2]})</span>
 		</li>
     </ul>
-	<p tal:condition="not:options/items">
-		${messages("Nothing found.")}
+	<p tal:condition="not:options/items" i18n:translate="">
+		Nothing found.
 	</p>
 
 </article>

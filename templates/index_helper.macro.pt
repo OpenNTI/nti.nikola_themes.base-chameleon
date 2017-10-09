@@ -6,15 +6,15 @@
 <nav metal:define-macro="html_pager"
      class="postindexpager">
      <ul class="pager"
-         tal:condition="python:options['prevlink'] or options['nextlink']"
-		 tal:define="messages nocall:options/messages">
+         tal:condition="python:options['prevlink'] or options['nextlink']">
+
        <li class="previous"
 		   tal:condition="options/prevlink">
-         <a href="${options/prevlink}" rel="prev">${python:messages("Newer posts")}</a>
+         <a href="${options/prevlink}" rel="prev" i18n:translate="">Newer posts</a>
        </li>
        <li class="next"
 		   tal:condition="options/nextlink">
-         <a href="${nextlink}" rel="next">${python:messages("Older posts")}</a>
+         <a href="${nextlink}" rel="next" i18n:translate="">Older posts</a>
        </li>
      </ul>
 </nav>

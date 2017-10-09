@@ -32,7 +32,7 @@
     <section class="comments"
 			 tal:condition="python:options['site_has_comments'] and options['enable_comments'] and not context.meta('nocomments')"
 			 >
-        <h2>${python:options['messages']("Comments")}</h2>
+        <h2 i18n:translate="">Comments</h2>
         ${python:options['comments'].comment_form(options['post'].permalink(absolute=True),
 		context.title(), context.base_path)}
     </section>

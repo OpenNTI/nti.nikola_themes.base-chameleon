@@ -1,5 +1,7 @@
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
-	  xmlns:metal="http://xml.zope.org/namespaces/metal">
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+	  xmlns:metal="http://xml.zope.org/namespaces/metal"
+	  xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
 <!-- <%inherit file="base.tmpl"/> -->
 <!-- <%namespace name="archive_nav" file="archive_navigation_helper.tmpl" import="*"/> -->
@@ -30,7 +32,7 @@
 			   class="listtitle">${post/title}</a>
 		</li>
     </ul>
-    <p tal:condition="not:options/posts">${python:options['messages']("No posts found.")}</p>
+    <p tal:condition="not:options/posts" i18n:translate="">No posts found.</p>
 
 </article>
 

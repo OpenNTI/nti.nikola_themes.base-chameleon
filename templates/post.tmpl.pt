@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
 	  xmlns:metal="http://xml.zope.org/namespaces/metal">
 
 <!-- <%namespace name="helper" file="post_helper.tmpl"/> -->
@@ -52,7 +53,7 @@
     <section class="comments hidden-print"
 			 tal:define="site_has_comments options/site_has_comments"
 			 tal:condition="python: not context.meta('nocomments') and site_has_comments">
-        <h2>${python:options['messages']("Comments")}</h2>
+        <h2 i18n:translate="">Comments</h2>
         ${python:options['comments'].comment_form(context.permalink(absolute=True), context.title(), context._base_path)}
         </section>
     <metal:block use-macro="macro:math_scripts_ifpost" />

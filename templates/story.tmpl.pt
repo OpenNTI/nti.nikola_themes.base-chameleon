@@ -1,5 +1,6 @@
 
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18"
 	  xmlns:metal="http://xml.zope.org/namespaces/metal">
 
 <!-- <%inherit file="post.tmpl"/> -->
@@ -27,7 +28,7 @@
     <section class="comments"
 			 tal:condition="python:options['site_has_comments'] and options['enable_comments'] and not context.meta('nocomments')"
 			 >
-        <h2>${python:options['messages']("Comments")}</h2>
+        <h2 i18n:translate="">Comments</h2>
         ${python:options['comments'].comment_form(context.permalink(absolute=True),
 		context.title(), context.base_path)}
     </section>

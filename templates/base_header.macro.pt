@@ -42,8 +42,7 @@
 
 <metal:block metal:define-macro="html_navigation_links">
     <nav id="menu">
-    <ul tal:define="messages nocall:options/messages;
-					lang options/lang;
+    <ul tal:define=" lang options/lang;
 					permalink options/permalink;
 					rel_link nocall:options/rel_link">
 		<tal:block tal:repeat="url_text python:options['navigation_links'][lang]">
@@ -53,9 +52,12 @@
 					<ul>
 						<tal:block tal:repeat="suburl_text url">
 							<tal:block tal:switch="python:rel_link(permalink, suburl[0]) == '#'">
-								<li tal:case="True"
-									class="active">
-									<a href="${permalink}">${python:suburl_text[1]}<span class="sr-only">${python:messages("(active)", lang)}</span></a>
+								<li tal:case="True" class="active">
+									<a href="${permalink}">${python:suburl_text[1]}
+                                    <span class="sr-only"
+                                          i18n:translate=""
+                                          i18n:target="lang">(active)</span>
+                                    </a>
 								</li>
 								<li tal:case="False">
 									<a
@@ -68,7 +70,11 @@
 				<tal:block tal:condition="python:not isinstance(url, tuple)">
 					<tal:block tal:switch="python:rel_link(permalink, url) == '#'">
 						<li tal:case="True" class="active">
-							<a href="${permalink}">${text}<span class="sr-only"> ${python:messages("(active)", lang)}</span></a>
+							<a href="${permalink}">${text}
+                            <span class="sr-only"
+                                  i18n:translate=""
+                                  i18n:target="lang">(active)</span>
+                            </a>
 						</li>
 						<li tal:case="False">
 							<a href="${url}">${text}</a>
@@ -86,8 +92,7 @@
 <metal:block metal:define-macro="html_translation_header">
     <div id="toptranslations"
 		 tal:condition="python:len(options['translations']) > 1">
-        <h2 tal:define="messages
-						nocall:options/messages">${python:messages("Languages:")}</h2>
+        <h2 i18n:translate="">Languages:</h2>
 		<metal:block metal:use-macro="macro:html_translations" />
     </div>
 </metal:block>

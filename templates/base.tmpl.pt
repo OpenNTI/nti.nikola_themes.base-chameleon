@@ -17,8 +17,8 @@ Also dropping translation support.
 
   <head metal:use-macro="macro:html_headstart" />
 
-  <body tal:define="messages nocall:options/messages">
-      <a href="#content" class="sr-only sr-only-focusable">${python:messages("Skip to main content")}</a>
+  <body>
+      <a href="#content" class="sr-only sr-only-focusable" i18n:translate="">Skip to main content</a>
       <metal:block metal:use-macro="macro:html_nav_menu" />
       <metal:block metal:use-macro="macro:html_page_header" />
       <div class="container" id="content" role="main">

@@ -1,5 +1,8 @@
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
-	  xmlns:metal="http://xml.zope.org/namespaces/metal">
+	  xmlns:metal="http://xml.zope.org/namespaces/metal"
+	  xmlns:tal="http://xml.zope.org/namespaces/tal"
+	  xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+
 <!-- <%inherit file="list_post.tmpl"/> --> <!-- doesn't seem to matter -->
 <!-- <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
 
@@ -15,7 +18,7 @@
         <h1>${options/title}</h1>
         <p tal:condition="options/description">${description}</p>
 		<tal:block tal:condition="options/subcategories|nothing">
-		<p tal:replace="python:options['messages']('Subcategories:')" />
+		<span i18n:translate="">Subcategories:</span>
         <ul>
 			<li tal:repeat="cat options/subcategories">
 				<a href="${python:cat[1]}">${python:cat[0]}</a>

@@ -1,5 +1,6 @@
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
 	  xmlns:metal="http://xml.zope.org/namespaces/metal">
 
 
@@ -13,9 +14,8 @@
 </metal:block>
 
 <metal:block fill-slot="content">
-<article class="authorindex"  tal:condition="options/items"
-         tal:define="messages nocall:options/messages">
-        <h2>${python:messages("Authors")}</h2>
+<article class="authorindex"  tal:condition="options/items">
+        <h2 i18n:translate="">Authors</h2>
         <div class="metadata">
             <!--! ${feeds_translations.translation_link(kind)} -->
         </div>

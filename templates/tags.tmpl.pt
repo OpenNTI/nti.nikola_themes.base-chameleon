@@ -1,5 +1,6 @@
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
 	  xmlns:metal="http://xml.zope.org/namespaces/metal">
 
 <!-- <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
@@ -14,7 +15,6 @@
          metal:fill-slot="content"
          tal:define="cat_items options/cat_items|nothing;
                      items python:options.get('items');
-                     messages nocall:options/messages;
                      hidden_tags options/hidden_tags">
   <!--! we use options.get('items') because the default path_traverse
       from z3c.pt.expressions will fallback to DefaultTraversable if
@@ -32,7 +32,7 @@
         </div>
     </header>
     <tal:block tal:condition="cat_items">
-        <h2 tal:condition="items">${python:messages("Categories")}</h2>
+        <h2 tal:condition="items" i18n:translate="">Categories</h2>
         <!--!
             XXX: The below does crazy things, potentially generating
             badly invalid HTML. Please don't do this.
@@ -68,7 +68,7 @@
         </tal:block>
 
 
-        <h2 tal:condition="items">${python:messages("Tags")}</h2>
+        <h2 tal:condition="items" i18n:translate="">Tags</h2>
     </tal:block>
     <ul class="list-inline" tal:condition="items">
         <tal:block tal:repeat="tl items">

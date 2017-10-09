@@ -21,8 +21,8 @@
     <h1>
 		${options/title}
 		<small tal:condition="options/source_link">
-			<a href="${options/source_link}">
-				(${python:options['messages']("Source")})
+			<a href="${options/source_link}" i18n:translate="">
+				Source
 			</a>
 		</small>
     </h1>

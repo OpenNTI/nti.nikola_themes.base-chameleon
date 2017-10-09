@@ -13,7 +13,6 @@
 
 <metal:block metal:define-macro="html_post_title_author_meta"
         tal:define="_link nocall:options/_link;
-                    message nocall:options/messages;
                     post context;
                     date_format options/date_format;
                     site_has_comments options/site_has_comments">
@@ -46,7 +45,7 @@
     <metal:block metal:use-macro="macro:html_sourcelink" />
     <p class="linkline"
        tal:condition="python:post.meta('link')">
-      <a href="${python:post.meta('link')}">${python:messages("Original site")}</a>
+      <a href="${post/meta:link" i18n:translate="">Original site</a>
     </p>
   </div>
 </metal:block>
@@ -61,15 +60,18 @@
 <!--! This is only meant to be called through @@macros/post_html_translations -->
 <metal:block metal:define-macro="post_html_translations"
              tal:define="post context;
-                         messages nocall:options/messages;
                          lang options/lang">
   <div class="metadata posttranslations translations"
        tal:condition="python:len(post.translated_to) > 1">
-    <h3 class="posttranslations-intro">${python:messages("Also available in:")}</h3>
+    <h3 class="posttranslations-intro" i18n:translate="">Also available in:</h3>
     <tal:block tal:repeat="langname python:sorted(options['translations'])">
       <p tal:condition="python:langname != lang and post.is_translation_available(langname)">
-        <a href="${python:post.permalink(langname)}" rel="alternate" hreflang="${langname}">
-          ${python:messages("LANGUAGE", langname)}
+        <a href="${python:post.permalink(langname)}"
+           rel="alternate"
+           hreflang="${langname}"
+           i18n:target="langname"
+           i18n:translate="">
+          LANGUAGE
         </a>
       </p>
     </tal:block>
@@ -79,10 +81,10 @@
 <metal:block metal:define-macro="html_sourcelink"
              tal:define="post context;
                          show_sourcelink options/show_sourcelink;
-                         messages nocall:options/messages;">
+                         ">
 
   <p class="sourceline" tal:condition="options/show_sourcelink">
-    <a href="${post/source_link}" class="sourcelink">${python:messages("Source")}</a>
+    <a href="${post/source_link}" class="sourcelink" i18n:translate="">Source</a>
   </p>
   </metal:block>
 

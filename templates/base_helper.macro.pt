@@ -179,14 +179,14 @@ Also dropping translation support.
 <metal:block metal:define-macro="html_translations">
     <ul class="translations"
 		tal:define="abs_link nocall:options/abs_link;
-		            _link nocall:options/link;
-					messages nocall:options/messages">
+		            _link nocall:options/link;">
 		<li tal:repeat="langname python:sorted(options['translations''])"
 			tal:omit-tag="python:langname == options['lang']">
             <a href="${abs_link(_link('root', None, langname))}"
                rel="alternate"
-               hreflang="${langname}">${messages("LANGUAGE", langname)}
-			</a>
+               i18n:translate=""
+               i18n:target="langname"
+               hreflang="${langname}">LANGUAGE</a>
 		</li>
     </ul>
 </metal:block>
