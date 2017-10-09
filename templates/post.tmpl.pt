@@ -26,31 +26,34 @@
 </metal:block>
 
 <metal:block fill-slot="extra_head">
+  <!--! A redirection point so that other templates can fill this slot
+      to do their own thing, and also still call the original that we
+      define. -->
   <metal:block metal:use-macro="template/macros/post_extra_head" />
 </metal:block>
 
 
 <article metal:fill-slot="content"
 		 tal:define="post context"
-		 class="post-${python:context.meta('type')} h-entry hentry
+		 class="post-${context/meta:type} h-entry hentry
 				postpage"
 		 itemscope="itemscope" itemtype="http://schema.org/Article">
   <metal:block metal:use-macro="macro:html_post_header" />
-    <div class="e-content entry-content" itemprop="articleBody text">
+  <div class="e-content entry-content" itemprop="articleBody text">
     ${structure:context/text}
-    </div>
-    <aside class="postpromonav">
+  </div>
+  <aside class="postpromonav">
     <nav>
       <metal:block use-macro="macro:html_tags" />
       <metal:block use-macro="macro:html_pager" />
     </nav>
-    </aside>
-    <section class="comments hidden-print"
-			 metal:use-macro="macro:post_comment_form">
-      Comment form would go here.
-    </section>
-    <metal:block use-macro="macro:math_scripts_ifpost" />
-    <metal:block metal:use-macro="macro:comment_link_script" />
+  </aside>
+  <section class="comments hidden-print"
+		   metal:use-macro="macro:post_comment_form">
+    Comment form would go here.
+  </section>
+  <metal:block use-macro="macro:math_scripts_ifpost" />
+  <metal:block metal:use-macro="macro:comment_link_script" />
 </article>
 
 </html>
