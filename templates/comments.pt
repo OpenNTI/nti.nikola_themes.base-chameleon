@@ -4,7 +4,19 @@
 
 <!--! Macros for comments in various systems. -->
 
-<!--! Links in the header or index -->
+<!--!
+Links in the header or index
+
+These will set the variable 'need_comment_script' to the context if
+they have ever been invoked and produced output while rendering a
+template. (Since we can only have one comment system at a time,
+this is idempotent.) You can then traverse that to get the script:
+   <div tal:define="global comment_link_post nothing"
+        tal:repeat="post posts">
+     <metal:block metal:use-macro="post/@@macros/comment_link" />
+   </div>
+   <metal:block metal:use-macr="comment_link_post/@@macros/comment_link_script">
+-->
 
 <!-- Dispatch macro name: comment-link -->
 
@@ -14,7 +26,8 @@
 
 <!-- Comments for disqus -->
 <p metal:define-macro="comment-link-disqus"
-   class="commentline">
+   class="commentline"
+   tal:define="global need_comment_script context">
   <a href="${context/permalink}#disqus_thread"
      data-disqus-identifier="${context/_base_path}">
     Comments
@@ -23,7 +36,9 @@
 
 <!--! END: Links in the header or index -->
 
-<!--! Scripts in the body when we display comments -->
+<!--!
+    Scripts in the body when we display comments.
+ -->
 
 <!--! No comments enabled. -->
 <metal:block metal:define-macro="comment-link-script-none" />
@@ -31,7 +46,7 @@
 <!--! Comments for disqus -->
 <script metal:define-macro="comment-link-script-disqus"
         tal:condition="options/comment_system_id"
-        tal:define="comment_system_id options/comment_system_id">
+        tal:define="comment_system_id options/comment_system_id;">
   var disqus_shortname="${comment_system_id}";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[
 0]||document.getElementsByTagName("body")[0]).appendChild(a)}());
 </script>

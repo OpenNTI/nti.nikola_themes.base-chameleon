@@ -32,12 +32,12 @@
     <metal:block use-macro="macro:page_navigation"
                  tal:condition="options/page_links|nothing" />
     <div class="postindex"
-         tal:define="index_teasers options/index_teasers;
-                     _link nocall:options/_link">
+         tal:define="_link nocall:options/_link;
+                     global need_comment_script nothing">
       <tal:block tal:repeat="post options/posts">
-        <article
+        <article tal:define="post_text post/@@post_text"
                  class="h-entry post-${post/meta:type}
-                        ${python:'post-preview' if index_teasers else ''}">
+                        ${post_text/preview}">
                 <a href="${post/permalink}" class="u-url">
                   <h1 class="p-name entry-title
                              post-title">${post/title}</h1>
@@ -64,27 +64,22 @@
                        class="commentline" />
                 </div>
 
-            <div tal:condition="index_teasers"
-                 class="p-summary entry-summary"
-                 tal:content="structure:python:post.text(teaser_only=True)">
+            <div
+                 class="p-${post_text/content_kind} entry-${post_text/content_kind}"
+                 tal:content="structure:post_text/content">
+                The content of the post.
+
+                This may be just a teaser.
             </div>
-
-            <div tal:condition="not:index_teasers"
-                 class="e-content entry-content"
-                 tal:content="structure:python:post.text(teaser_only=False)">
-            </div>
-
-
         </article>
-        <hr />
-        <!--! TODO: Inserting the script too often -->
-        <metal:block metal:use-macro="post/@@macros/comment_link_script" />
+        <hr tal:omit-tag="repeat/post/end" />
       </tal:block>
+      <script metal:use-macro="need_comment_script/@@macros/comment_link_script"
+              tal:condition="need_comment_script" />
     </div>
 
     <metal:block metal:use-macro="macro:html_pager" />
     <metal:block metal:use-macro="macro:math_scripts_ifposts" />
-
 
 
 </metal:block>

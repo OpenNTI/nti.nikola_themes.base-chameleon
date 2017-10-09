@@ -19,7 +19,7 @@
      </ul>
 </nav>
 
-<!-- The default does nothing -->
+<!--! The default does nothing -->
 <metal:block define-macro="front_index_header" />
 
 
