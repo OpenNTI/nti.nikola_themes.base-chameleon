@@ -72,4 +72,62 @@
              layer=".interfaces.IMainIndexPageKind"
              />
 
+  <!-- Comment systems -->
+  <z3c:macro name="comment_link"
+             macro="comment-link-none"
+             for="*"
+             view=".interfaces.ICommentKindNone"
+             layer="*"
+             template="comments.pt" />
+
+  <z3c:macro name="comment_link"
+             macro="comment-link-disqus"
+             for="*"
+             view=".interfaces.ICommentKindDisqus"
+             layer="*"
+             template="comments.pt" />
+
+
+  <z3c:macro name="comment_link_script"
+             macro="comment-link-script-disqus"
+             for="*"
+             view=".interfaces.ICommentKindDisqus"
+             layer="*"
+             template="comments.pt" />
+
+  <z3c:macro name="comment_link_script"
+             macro="comment-link-script-none"
+             for="*"
+             view=".interfaces.ICommentKindNone"
+             layer="*"
+             template="comments.pt" />
+
+  <z3c:macro name="comment_form"
+             macro="comment-form-disqus"
+             for="*"
+             view=".interfaces.ICommentKindDisqus"
+             layer="*"
+             template="comments.pt" />
+
+  <z3c:macro name="comment_form"
+             macro="comment-form-none"
+             for="*"
+             view=".interfaces.ICommentKindNone"
+             layer="*"
+             template="comments.pt" />
+
+  <z3c:macro name="post_comment_form"
+             macro="post-comment-form-generic"
+             for="*"
+             view=".interfaces.ICommentKindAllowed"
+             layer="*"
+             template="comments.pt" />
+
+  <z3c:macro name="post_comment_form"
+             macro="post-comment-form-none"
+             for="*"
+             view=".interfaces.ICommentKindNone"
+             layer="*"
+             template="comments.pt" />
+
 </configure>

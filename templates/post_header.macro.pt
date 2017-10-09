@@ -15,9 +15,7 @@
         tal:define="_link nocall:options/_link;
                     post context;
                     date_format options/date_format;
-                    site_has_comments options/site_has_comments">
-
-
+                    ">
   <metal:block metal:use-macro="macro:html_title" />
   <div class="metadata meta">
     <p class="byline author vcard">
@@ -39,12 +37,12 @@
       </a>
     </p>
     <p class="commentline"
-       tal:condition="python:not post.meta('nocomments') and site_has_comments">
-      ${comments.comment_link(post.permalink(), post._base_path)}
+       metal:use-macro="macro:comment-link">
+      Comments
     </p>
     <metal:block metal:use-macro="macro:html_sourcelink" />
     <p class="linkline"
-       tal:condition="python:post.meta('link')">
+       tal:condition="post/meta:link">
       <a href="${post/meta:link" i18n:translate="">Original site</a>
     </p>
   </div>

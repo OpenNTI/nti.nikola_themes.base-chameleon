@@ -1,12 +1,8 @@
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal">
 
-<!--! <%namespace name="helper" file="index_helper.tmpl"/> -->
-<!--! <%namespace name="math" file="math_helper.tmpl"/> -->
-<!--! <%namespace name="comments" file="comments_helper.tmpl"/> -->
-<!--! <%namespace name="pagination" file="pagination_helper.tmpl"/> -->
 <!--! <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
-<!--! <%inherit file="base.tmpl"/> -->
 
 <metal:block metal:fill-slot="extra_head">
     <link
@@ -62,11 +58,10 @@
                                   title="${python:post.formatted_date(options['date_format'])}">
                                 ${python:post.formatted_date(options['date_format'])}
                             </time>
-                    </a></p>
-                    <p class="commentline"
-                       tal:condition="python: not post.meta('nocomments') and options['site_has_comments']">
-                        ${comments.comment_link(post.permalink(), post._base_path)}
+                        </a>
                     </p>
+                    <p metal:use-macro="post/@@macros/comment_link"
+                       class="commentline" />
                 </div>
 
             <div tal:condition="index_teasers"
@@ -82,13 +77,15 @@
 
         </article>
         <hr />
+        <!--! TODO: Inserting the script too often -->
+        <metal:block metal:use-macro="post/@@macros/comment_link_script" />
       </tal:block>
     </div>
 
     <metal:block metal:use-macro="macro:html_pager" />
     <metal:block metal:use-macro="macro:math_scripts_ifposts" />
-    <metal:block metal:use-macro="macro:comment_link_script"
-                 tal:condition="options/site_has_comments" />
+
+
 
 </metal:block>
 

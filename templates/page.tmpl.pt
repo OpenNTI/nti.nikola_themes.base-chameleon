@@ -2,13 +2,6 @@
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
 	  xmlns:metal="http://xml.zope.org/namespaces/metal">
 
-<!-- <%inherit file="post.tmpl"/> -->
-
-<!-- <%namespace name="helper" file="post_helper.tmpl"/> -->
-<!-- <%namespace name="pheader" file="post_header.tmpl"/> -->
-<!-- <%namespace name="comments" file="comments_helper.tmpl"/> -->
-<!-- <%namespace name="math" file="math_helper.tmpl"/> -->
-
 <metal:block fill-slot="extra_head">
   <metal:block metal:use-macro="context/@@post.tmpl/index/macros/post_extra_head" />
 </metal:block>
@@ -27,16 +20,13 @@
 
   <metal:block metal:use-macro="macro:html_page_article_header" />
   <div class="e-content entry-content" itemprop="articleBody text">
-    ${structure:options/post/text}
+    ${structure:context/text}
   </div>
-    <section class="comments"
-			 tal:condition="python:options['site_has_comments'] and options['enable_comments'] and not context.meta('nocomments')"
-			 >
-        <h2 i18n:translate="">Comments</h2>
-        ${python:options['comments'].comment_form(options['post'].permalink(absolute=True),
-		context.title(), context.base_path)}
-    </section>
-    <metal:block use-macro="macro:math_scripts_ifpost" />
-
+  <section class="comments hidden-print"
+		   metal:use-macro="macro:post_comment_form">
+    Comment form would go here.
+  </section>
+  <metal:block metal:use-macro="macro:math_scripts_ifpost" />
+  <metal:block metal:use-macro="macro:comment_link_script" />
 </article>
 </html>
