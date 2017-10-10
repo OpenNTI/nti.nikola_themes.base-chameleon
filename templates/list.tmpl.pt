@@ -6,15 +6,10 @@
 <!-- <%namespace name="archive_nav" file="archive_navigation_helper.tmpl" import="*"/> -->
 <!-- <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
 
-
-<metal:block fill-slot="extra_head"
-             tal:define="has_no_feeds options/has_no_feeds|nothing;
-                         kind options/kind;
-                         ">
-  <tal:block tal:replace="structure
-                          python:request.feed_translations_head(kind=kind,
-                          rss_override=False, has_no_feeds=has_no_feeds)" />
-</metal:block>
+<!--! This is used for archives of posts: both the "full" archives (in
+     which case the context is IListPage exactly) and the monthly
+     archives (in which case the context is IArchivePage, a kind of IListPage).
+-->
 
 
 <article class="listpage" metal:fill-slot="content">
@@ -24,9 +19,9 @@
     <tal:block metal:use-macro="macro:archive_navigation" />
     <!--! ${feeds_translations.translation_link(kind)} -->
     <ul class="postlist" tal:condition="options/items">
-		<li tal:repeat="item options/items">
-			<a tal:attributes="href python:item[1]">${python:item[0]}</a>
-			<span tal:condition="python:item[2]">(${python:item[2]})</span>
+		<li tal:repeat="(name,href,count) options/items">
+			<a tal:attributes="href href">${name}</a>
+			<span tal:condition="count">(${count})</span>
 		</li>
     </ul>
 	<p tal:condition="not:options/items" i18n:translate="">

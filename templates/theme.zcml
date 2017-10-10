@@ -177,12 +177,14 @@
       weight="0"
       />
 
+  <!-- This covers list.tmpl and archiveindex.tmpl
+       and IListKind and IArchiveListKind -->
   <browser:viewlet
       name="default_extra_head"
       manager=".interfaces.IHtmlHeadViewletManager"
-      template="v_archive_extra_head.pt"
+      template="v_list_extra_head.pt"
       permission="zope.Public"
-      layer=".interfaces.IArchivePageKind"
+      layer=".interfaces.IListPageKind"
       weight="0"
       />
 
