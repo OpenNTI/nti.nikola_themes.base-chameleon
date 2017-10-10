@@ -84,8 +84,21 @@
   <p class="sourceline" tal:condition="options/show_sourcelink">
     <a href="${post/source_link}" class="sourcelink" i18n:translate="">Source</a>
   </p>
-  </metal:block>
+</metal:block>
 
-
-
+<metal:block metal:define-macro="html_posts_postlist">
+    <ul class="postlist" tal:condition="options/posts">
+      <li tal:repeat="post options/posts"
+          tal:define="date_format options/date_format">
+        <time class="listdate"
+              tal:define="date post/formatted_date:?date_format"
+              datetime="${post/formatted_date:webiso}"
+              title="${date}"
+              tal:content="date">2007-10-10</time>
+        <a href="${post/permalink}"
+           class="listtitle">${post/title}</a>
+      </li>
+    </ul>
+    <p tal:condition="not:options/posts" i18n:translate="">No posts found.</p>
+</metal:block>
 </metal:block>

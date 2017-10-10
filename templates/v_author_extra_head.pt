@@ -1,0 +1,4 @@
+<metal:block tal:define="author options/author;
+                         kind options/kind; ">
+    ${structure:python:request.feed_translations_head(author, kind, rss_override=False)}
+</metal:block>

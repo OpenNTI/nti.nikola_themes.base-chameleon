@@ -1,10 +1,5 @@
-
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
 	  xmlns:metal="http://xml.zope.org/namespaces/metal">
-
-<metal:block fill-slot="extra_head">
-  <metal:block metal:use-macro="context/@@post.tmpl/index/macros/post_extra_head" />
-</metal:block>
 
 <metal:block define-macro="html_page_article_header">
     <header>

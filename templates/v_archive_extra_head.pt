@@ -1,0 +1,5 @@
+<tal:block
+             tal:define=" kind options/kind;">
+  <tal:block tal:replace="structure
+                          python:request.feed_translations_head(kind=kind, rss_override=False)" />
+</tal:block>

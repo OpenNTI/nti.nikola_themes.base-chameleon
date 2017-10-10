@@ -33,17 +33,6 @@
         </div>
         <!--! ${feeds_translations.translation_link(kind)} -->
     </header>
-    <ul class="postlist" tal:condition="options/posts">
-        <li tal:repeat="post options/posts">
-			<time class="listdate"
-				  datetime="${python:post.formatted_date('webiso')}"
-				  title="${python:post.formatted_date(options['date_format'])}">
-				${python:post.formatted_date(options['date_format'])}
-			</time>
-			<a href="${post/permalink}"
-			   class="listtitle">${post/title}</a>
-		</li>
-
-    </ul>
+    <metal:block use-macro="macro:html_posts_postlist" />
 </article>
 </html>

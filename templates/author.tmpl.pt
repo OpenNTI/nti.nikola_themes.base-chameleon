@@ -3,45 +3,16 @@
 	  xmlns:metal="http://xml.zope.org/namespaces/metal">
 
 
-<!--! <%inherit file="list_post.tmpl"/> --> <!--! XXX: Using base. But
-                                            their templates don't seem
-                                            to do anything special in
-                                            this case anyway. -->
-<!--! <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
-
-<metal:block fill-slot="extra_head"
-             tal:define="author options/author;
-                         kind options/kind;
-                         ">
-  <tal:block tal:replace="structure
-                          python:request.feed_translations_head(author,
-                          kind, rss_override=False)" />
-</metal:block>
-
-<metal:block fill-slot="content">
-<article class="authorpage">
+<article class="authorpage" fill-slot="content">
     <header>
         <h1>${options/title}</h1>
-        <p tal:condition="options/description" tal:content="options/description">
-          A Description
-        </p>
-        <div class="metadata"
-             tal:define="author options/author;
-                         kind options/kind;"
-             tal:content="structure python:request.feed_link(author, kind)">
-        </div>
+        <tal:block replace="structure provider:content_header" />
     </header>
 
-    <ul class="postlist" tal:condition="options/posts">
-      <li tal:repeat="post options/posts" tal:define="date_format options/date_format">
-        <time class="listdate"
-              datetime="${python:post.formatted_date('webiso')}"
-              title="${python:post.formatted_date(date_format)}">${python:post.formatted_date(date_format)}</time>
-        <a href="${post/permalink}"
-           class="listtitle">${post/title}</a>
-      </li>
+    <ul metal:use-macro="macro:html_posts_postlist">
+        <li>A post</li>
     </ul>
 </article>
-</metal:block>
+
 
 </html>

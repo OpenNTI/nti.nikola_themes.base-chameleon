@@ -3,10 +3,6 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18"
 	  xmlns:metal="http://xml.zope.org/namespaces/metal">
 
-<metal:block fill-slot="extra-head">
-  <metal:block metal:use-macro="context/@@post.tmpl/index/macros/post_extra_head" />
-</metal:block>
-
 <article metal:fill-slot="content"
 		 class="post-${python:context.meta('type')} storypage"
 		 itemscope="itemscope"

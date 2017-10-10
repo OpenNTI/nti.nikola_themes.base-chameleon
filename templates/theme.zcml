@@ -139,6 +139,9 @@
   <!-- To extend, use a new name. To replace use the same name
        with at least as specific a registration.
   -->
+
+  <!-- Extra head -->
+  <!-- The normal extra head for a page is called 'default_extra_head' -->
   <browser:viewletManager
       name="extra_head"
       provides=".interfaces.IHtmlHeadViewletManager"
@@ -148,7 +151,7 @@
       />
 
   <browser:viewlet
-      name="index_extra_head"
+      name="default_extra_head"
       manager=".interfaces.IHtmlHeadViewletManager"
       template="v_index_extra_head.pt"
       permission="zope.Public"
@@ -165,9 +168,73 @@
       weight="1"
       />
 
+  <browser:viewlet
+      name="default_extra_head"
+      manager=".interfaces.IHtmlHeadViewletManager"
+      template="v_author_extra_head.pt"
+      permission="zope.Public"
+      layer=".interfaces.IAuthorPageKind"
+      weight="0"
+      />
+
+  <browser:viewlet
+      name="default_extra_head"
+      manager=".interfaces.IHtmlHeadViewletManager"
+      template="v_archive_extra_head.pt"
+      permission="zope.Public"
+      layer=".interfaces.IArchivePageKind"
+      weight="0"
+      />
+
+  <!-- posts, pages, stories and books all have the same extra header -->
+  <browser:viewlet
+      name="default_extra_head"
+      manager=".interfaces.IHtmlHeadViewletManager"
+      template="v_post_extra_head.pt"
+      permission="zope.Public"
+      layer=".interfaces.IPostPageKind"
+      weight="0"
+      />
+
+  <browser:viewlet
+      name="default_extra_head"
+      manager=".interfaces.IHtmlHeadViewletManager"
+      template="v_post_extra_head.pt"
+      permission="zope.Public"
+      layer=".interfaces.IPagePageKind"
+      weight="0"
+      />
+
+  <browser:viewlet
+      name="default_extra_head"
+      manager=".interfaces.IHtmlHeadViewletManager"
+      template="v_post_extra_head.pt"
+      permission="zope.Public"
+      layer=".interfaces.IStoryPageKind"
+      weight="0"
+      />
+
+  <browser:viewlet
+      name="default_extra_head"
+      manager=".interfaces.IHtmlHeadViewletManager"
+      template="v_post_extra_head.pt"
+      permission="zope.Public"
+      layer=".interfaces.IBookPageKind"
+      weight="0"
+      />
+  <!-- books get extra -->
+  <browser:viewlet
+      name="book_extra_head"
+      manager=".interfaces.IHtmlHeadViewletManager"
+      template="v_book_extra_head.pt"
+      permission="zope.Public"
+      layer=".interfaces.IBookPageKind"
+      weight="1"
+      />
+
   <browser:viewletManager
       name="content_header"
-      provides=".interfaces.IHtmlBodyContentViewletManager"
+      provides=".interfaces.IHtmlBodyContentHeaderViewletManager"
       template="vm_std_replace.pt"
       class="zope.viewlet.manager.WeightOrderedViewletManager"
       permission="zope.Public"
@@ -175,12 +242,19 @@
 
   <browser:viewlet
       name="archive_index_content_header"
-      manager=".interfaces.IHtmlBodyContentViewletManager"
+      manager=".interfaces.IHtmlBodyContentHeaderViewletManager"
       template="v_archiveindex_content_header.pt"
       layer=".interfaces.IArchiveIndexPageKind"
       permission="zope.Public"
       />
 
+  <browser:viewlet
+      name="author_content_header"
+      manager=".interfaces.IHtmlBodyContentHeaderViewletManager"
+      template="v_author_content_header.pt"
+      layer=".interfaces.IAuthorPageKind"
+      permission="zope.Public"
+      />
 
   <z3c:template
       template="index.tmpl.pt"
