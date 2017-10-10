@@ -30,12 +30,9 @@ Also dropping translation support.
           </div>
         </div>
       </div>
-	  <div metal:use-macro="macro:late_load_js" />
 
+      <metal:block tal:replace="structure provider:body_footer_js" />
 
-      <div metal:use-macro="macro:base_extra_js" />
-	  <div metal:define-slot="extra_js" />
-      <script metal:use-macro="macro:base_end_js" />
     <!--! ${body_end} -->
     <!--! ${template_hooks['body_end']()} -->
 </body>

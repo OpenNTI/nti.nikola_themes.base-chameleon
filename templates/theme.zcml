@@ -222,6 +222,16 @@
       layer=".interfaces.IBookPageKind"
       weight="0"
       />
+
+  <browser:viewlet
+      name="default_extra_head"
+      manager=".interfaces.IHtmlHeadViewletManager"
+      template="v_gallery_extra_head.pt"
+      permission="zope.Public"
+      layer=".interfaces.IGalleryPageKind"
+      weight="0"
+      />
+
   <!-- books get extra -->
   <browser:viewlet
       name="book_extra_head"
@@ -232,6 +242,7 @@
       weight="1"
       />
 
+  <!-- Content headers -->
   <browser:viewletManager
       name="content_header"
       provides=".interfaces.IHtmlBodyContentHeaderViewletManager"
@@ -256,6 +267,56 @@
       permission="zope.Public"
       />
 
+  <!-- Body footers -->
+
+  <!-- The main body template puts this after the content to include
+       additional javascript -->
+  <browser:viewletManager
+      name="body_footer_js"
+      provides=".interfaces.IHtmlBodyFooterViewletManager"
+      template="vm_std_replace.pt"
+      class="zope.viewlet.manager.WeightOrderedViewletManager"
+      permission="zope.Public"
+      />
+
+  <browser:viewlet
+      name="generic_body_footer_js"
+      manager=".interfaces.IHtmlBodyFooterViewletManager"
+      template="v_body_footer.pt"
+      permission="zope.Public"
+      weight="0"
+      />
+
+  <browser:viewlet
+      name="extra_body_footer_js"
+      manager=".interfaces.IHtmlBodyFooterViewletManager"
+      template="v_body_footer_extra_js.pt"
+      permission="zope.Public"
+      weight="1"
+      />
+
+  <!-- book adds body footers -->
+  <browser:viewlet
+      name="default_body_footer_js"
+      manager=".interfaces.IHtmlBodyFooterViewletManager"
+      layer=".interfaces.IBookPageKind"
+      permission="zope.Public"
+      template="v_book_footer_extra_js.pt"
+      weight="9"
+      />
+
+  <!-- gallery adds body footers -->
+  <browser:viewlet
+      name="default_body_footer_js"
+      manager=".interfaces.IHtmlBodyFooterViewletManager"
+      layer=".interfaces.IGalleryPageKind"
+      permission="zope.Public"
+      template="v_gallery_footer_extra_js.pt"
+      weight="9"
+      />
+
+  <!-- alias 'archiveindex.tmpl' (which we don't have)
+       to 'index.tmpl' (which we do) -->
   <z3c:template
       template="index.tmpl.pt"
       name="archiveindex.tmpl"
