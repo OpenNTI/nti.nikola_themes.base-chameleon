@@ -4,31 +4,16 @@
 
 <!--! <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
 
-<metal:block metal:define-macro="index_extra_head">
-    <link
-        tal:define="posts options/posts;
-                    permalink options/permalink;
-                    index_file options/index_file|string:nothing"
-        tal:condition="python: posts and (permalink == '/' or permalink == '/' + index_file)"
-        rel="prefetch"
-        href="${python:options['posts'][0].permalink()}"
-        type="text/html" />
-    <metal:block metal:use-macro="macro:math_styles_ifposts" />
-</metal:block>
 
-<metal:block metal:fill-slot="extra_head">
-    <metal:block metal:use-macro="template/index_extra_head" />
-</metal:block>
-
-
-<!-- This is registered for IMainIndexPageKind -->
+<!--! This is registered for IMainIndexPageKind -->
+<!--! TODO: A viewlet -->
 <metal:block define-macro="front_index_header_IMainIndexPageKind">
     <h1 tal:replace="structure:options/front_index_header" />
 </metal:block>
 
 
-<metal:block metal:define-macro="content_macro">
-    <metal:block metal:define-slot="content_content_header" />
+<metal:block metal:fill-slot="content">
+    <tal:block replace="structure provider:content_header" />
 
     <h1 metal:use-macro="macro:front_index_header" />
 
@@ -85,10 +70,6 @@
     <metal:block metal:use-macro="macro:math_scripts_ifposts" />
 
 
-</metal:block>
-
-<metal:block metal:fill-slot="content">
-    <metal:block metal:use-macro="template/content_macro" />
 </metal:block>
 
 </html>

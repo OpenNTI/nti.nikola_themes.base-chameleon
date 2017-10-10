@@ -1,0 +1,2 @@
+<!-- I'm from the archive -->
+${structure:python:request.feed_translations_head(options['archive_name'])}

@@ -67,7 +67,6 @@
              tal:define="posts options/posts"
              >
 	<metal:block metal:use-macro="macro:math_styles"
-
 				 tal:condition="python:any(post.is_mathjax for post in posts)"
 				 />
 </metal:block>

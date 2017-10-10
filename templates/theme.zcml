@@ -2,10 +2,14 @@
 <configure	xmlns="http://namespaces.zope.org/zope"
             xmlns:i18n="http://namespaces.zope.org/i18n"
             xmlns:zcml="http://namespaces.zope.org/zcml"
-            xmlns:z3c="http://namespaces.zope.org/z3c">
+            xmlns:z3c="http://namespaces.zope.org/z3c"
+            xmlns:browser="http://namespaces.zope.org/browser"
+            >
 
   <include package="z3c.macro" />
   <include package="z3c.macro" file="meta.zcml" />
+  <include package="z3c.template" file="meta.zcml" />
+  <include package="zope.viewlet" file="meta.zcml" />
 
   <z3c:macro name="open_graph_metadata"
              for=".interfaces.IPost"
@@ -129,5 +133,59 @@
              view=".interfaces.ICommentKindNone"
              layer="*"
              template="comments.pt" />
+
+
+  <!-- Viewlets and Viewlet managers -->
+  <!-- To extend, use a new name. To replace use the same name
+       with at least as specific a registration.
+  -->
+  <browser:viewletManager
+      name="extra_head"
+      provides=".interfaces.IHtmlHeadViewletManager"
+      template="vm_std_replace.pt"
+      class="zope.viewlet.manager.WeightOrderedViewletManager"
+      permission="zope.Public"
+      />
+
+  <browser:viewlet
+      name="index_extra_head"
+      manager=".interfaces.IHtmlHeadViewletManager"
+      template="v_index_extra_head.pt"
+      permission="zope.Public"
+      layer=".interfaces.IIndexPageKind"
+      weight="0"
+      />
+
+  <browser:viewlet
+      name="archive_index_extra_head"
+      manager=".interfaces.IHtmlHeadViewletManager"
+      template="v_archiveindex_extra_head.pt"
+      permission="zope.Public"
+      layer=".interfaces.IArchiveIndexPageKind"
+      weight="1"
+      />
+
+  <browser:viewletManager
+      name="content_header"
+      provides=".interfaces.IHtmlBodyContentViewletManager"
+      template="vm_std_replace.pt"
+      class="zope.viewlet.manager.WeightOrderedViewletManager"
+      permission="zope.Public"
+      />
+
+  <browser:viewlet
+      name="archive_index_content_header"
+      manager=".interfaces.IHtmlBodyContentViewletManager"
+      template="v_archiveindex_content_header.pt"
+      layer=".interfaces.IArchiveIndexPageKind"
+      permission="zope.Public"
+      />
+
+
+  <z3c:template
+      template="index.tmpl.pt"
+      name="archiveindex.tmpl"
+      layer=".interfaces.IArchiveIndexPageKind"
+      />
 
 </configure>
