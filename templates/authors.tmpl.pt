@@ -7,27 +7,22 @@
 <!--! <%inherit file="base.tmpl"/> -->
 <!--! <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
 
-<metal:block fill-slot="extra_head">
-  <tal:block
-      tal:replace="python:request.feed_translations_head(kind=options.get('kind'),
-                   feeds=False)" />
-</metal:block>
 
-<metal:block fill-slot="content">
-<article class="authorindex"  tal:condition="options/items">
-        <h2 i18n:translate="">Authors</h2>
-        <div class="metadata">
+<article class="authorindex"
+         metal:fill-slot="content"
+         tal:condition="options/items">
+    <h2 i18n:translate="">Authors</h2>
+    <div class="metadata">
             <!--! ${feeds_translations.translation_link(kind)} -->
-        </div>
-        <ul class="postlist"
-            tal:define="hidden_authors options/hidden_authors">
-          <li tal:repeat="text_link options/items"
-              tal:omit-tag="python:text_link[0] in hidden_authors">
+    </div>
+    <ul class="postlist"
+        tal:define="hidden_authors options/hidden_authors">
+        <li tal:repeat="(name,link) options/items"
+            tal:omit-tag="python:name in hidden_authors">
             <a class="reference listtitle"
-               tal:define="link python:text_link[1]; text python:text_link[0]"
-               href="${link}">${text}</a>
-          </li>
-        </ul>
+               href="${link}">${name}</a>
+        </li>
+    </ul>
 </article>
-</metal:block>
+
 </html>

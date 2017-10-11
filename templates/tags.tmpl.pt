@@ -5,11 +5,6 @@
 
 <!-- <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
 
-<metal:block metal:fill-slot="extra_head"
-             tal:define="kind options/kind|nothing;">
-  <metal:block tal:replace="structure python:request.feed_translations_head(kind=kind , feeds=False)"/>
-</metal:block>
-
 
 <article class="tagindex"
          metal:fill-slot="content"
@@ -71,12 +66,10 @@
         <h2 tal:condition="items" i18n:translate="">Tags</h2>
     </tal:block>
     <ul class="list-inline" tal:condition="items">
-        <tal:block tal:repeat="tl items">
-            <tal:block tal:define="text python:tl[0]; link python:tl[1]">
-                <li tal:condition="python:text not in hidden_tags">
-                    <a class="reference badge" href="${link}">${text}</a>
-                </li>
-            </tal:block>
+        <tal:block tal:repeat="(text,link) items">
+            <li tal:condition="python:text not in hidden_tags">
+                <a class="reference badge" href="${link}">${text}</a>
+            </li>
         </tal:block>
     </ul>
 

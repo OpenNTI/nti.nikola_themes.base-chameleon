@@ -78,12 +78,6 @@ Also dropping translation support.
     <tal:block tal:replace="structure:options/extra_head_data"
                tal:condition="options/extra_head_data"/>
 
-    <!--! whereas extra_head is meant to be a macro slot. Consider
-         this deprecated (because only the single direct use-macro
-         caller of the template can fill it in) in favor of the next
-         line. -->
-    <metal:block metal:define-slot="extra_head" />
-
     <!--! The extensible viewlet manager; anyone can add things based
          on view, context and request/layer to it. -->
     <tal:block content="structure provider:extra_head" />

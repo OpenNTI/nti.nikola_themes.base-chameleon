@@ -1,0 +1,3 @@
+<tal:block xmlns:tal="http://xml.zope.org/namespaces/tal">
+    ${structure:python:request.feed_translations_head(kind=options.get('kind'), feeds=False)}
+</tal:block>

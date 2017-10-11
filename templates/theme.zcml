@@ -177,6 +177,16 @@
       weight="0"
       />
 
+  <browser:viewlet
+      name="default_extra_head"
+      manager=".interfaces.IHtmlHeadViewletManager"
+      template="v_authors_extra_head.pt"
+      permission="zope.Public"
+      layer=".interfaces.IAuthorsPageKind"
+      weight="0"
+      />
+
+
   <!-- This covers list.tmpl and archiveindex.tmpl
        and IListKind and IArchiveListKind -->
   <browser:viewlet
@@ -231,6 +241,24 @@
       template="v_gallery_extra_head.pt"
       permission="zope.Public"
       layer=".interfaces.IGalleryPageKind"
+      weight="0"
+      />
+
+  <browser:viewlet
+      name="default_extra_head"
+      manager=".interfaces.IHtmlHeadViewletManager"
+      template="v_tag_extra_head.pt"
+      permission="zope.Public"
+      layer=".interfaces.ITagPageKind"
+      weight="0"
+      />
+
+  <browser:viewlet
+      name="default_extra_head"
+      manager=".interfaces.IHtmlHeadViewletManager"
+      template="v_tags_extra_head.pt"
+      permission="zope.Public"
+      layer=".interfaces.ITagsPageKind"
       weight="0"
       />
 
