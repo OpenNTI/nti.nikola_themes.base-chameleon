@@ -19,7 +19,8 @@ Also dropping translation support.
                 title options/title|nothing;
                 blog_title options/blog_title;
                 prevlink options/prevlink|nothing;
-                nextlink options/nextlink|nothing;">
+                nextlink options/nextlink|nothing;
+                feeds context/@@feeds">
 
     <meta charset="utf-8" />
     <base href="${python:abs_link(permalink)}"
@@ -28,8 +29,8 @@ Also dropping translation support.
           tal:condition="description" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title tal:condition="python:title==blog_title">${blog_title}</title>
-    <title tal:condition="python:title!= blog_title">${title} | ${blog_title}</title>
+    <title tal:condition="python:title == blog_title or not title">${blog_title}</title>
+    <title tal:condition="python:title and title != blog_title">${title} | ${blog_title}</title>
 
     <link metal:use-macro="macro:html_stylesheets" />
 
@@ -37,21 +38,14 @@ Also dropping translation support.
     <meta name="generator" content="Nikola (getnikola.com)"
           tal:condition="options/meta_generator_tag" />
 
-    <tal:block
-        tal:replace="structure python:request.feed_translations_head(classification=None,
-                     kind='index',
-                     other=False)" />
+
+    ${structure:python:feeds.feed_translations_head(classification=None, kind='index', other=False)}
 
     <link rel="canonical" href="${python:abs_link(permalink)}" />
 
 	<tal:block tal:condition="options/favicons"
-			   tal:repeat="icon options/favicons">
-    <link rel="${name}" href="${file}" sizes="${size}"
-          tal:define="name python:icon[0];
-                      file python:icon[1];
-                      size python:icon[2]"
-          tal:condition="options/favicons"
-          />
+			   tal:repeat="(name,file,size) options/favicons">
+        <link rel="${name}" href="${file}" sizes="${size}" />
 	</tal:block>
 
     <meta property="fb:app_id" content="${comment_system_id}"

@@ -145,7 +145,6 @@
   <browser:viewletManager
       name="extra_head"
       provides=".interfaces.IHtmlHeadViewletManager"
-      template="vm_std_replace.pt"
       class="zope.viewlet.manager.WeightOrderedViewletManager"
       permission="zope.Public"
       />
@@ -272,15 +271,16 @@
       weight="1"
       />
 
+  <!-- *************** -->
   <!-- Content headers -->
   <browser:viewletManager
       name="content_header"
       provides=".interfaces.IHtmlBodyContentHeaderViewletManager"
-      template="vm_std_replace.pt"
-      class="zope.viewlet.manager.WeightOrderedViewletManager"
+      class=".view.ConditionalViewletManager"
       permission="zope.Public"
       />
 
+  <!-- Archive Index page -->
   <browser:viewlet
       name="archive_index_content_header"
       manager=".interfaces.IHtmlBodyContentHeaderViewletManager"
@@ -289,12 +289,99 @@
       permission="zope.Public"
       />
 
+  <!-- Author page -->
   <browser:viewlet
-      name="author_content_header"
+      name="title_content_header"
       manager=".interfaces.IHtmlBodyContentHeaderViewletManager"
-      template="v_author_content_header.pt"
+      template="v_generic_title.pt"
       layer=".interfaces.IAuthorPageKind"
       permission="zope.Public"
+      weight="0"
+      />
+
+  <browser:viewlet
+      name="description_content_header"
+      manager=".interfaces.IHtmlBodyContentHeaderViewletManager"
+      template="v_generic_description.pt"
+      layer=".interfaces.IAuthorPageKind"
+      permission="zope.Public"
+      weight="2"
+      />
+
+  <browser:viewlet
+      name="feed_content_header"
+      manager=".interfaces.IHtmlBodyContentHeaderViewletManager"
+      class=".feeds.HTMLFeedLinkViewlet"
+      layer=".interfaces.IAuthorPageKind"
+      permission="zope.Public"
+      weight="1"
+      classification_name="author"
+      />
+
+  <!-- Tag page -->
+  <browser:viewlet
+      name="title_content_header"
+      manager=".interfaces.IHtmlBodyContentHeaderViewletManager"
+      template="v_generic_title.pt"
+      layer=".interfaces.ITagPageKind"
+      permission="zope.Public"
+      weight="0"
+      />
+
+  <browser:viewlet
+      name="feed_content_header"
+      manager=".interfaces.IHtmlBodyContentHeaderViewletManager"
+      class=".feeds.HTMLFeedLinkViewlet"
+      layer=".interfaces.ITagPageKind"
+      permission="zope.Public"
+      weight="1"
+      classification_name="tag"
+      />
+
+  <browser:viewlet
+      name="description_content_header"
+      manager=".interfaces.IHtmlBodyContentHeaderViewletManager"
+      template="v_generic_description.pt"
+      layer=".interfaces.ITagPageKind"
+      permission="zope.Public"
+      weight="2"
+      />
+
+  <browser:viewlet
+      name="subcat_content_header"
+      manager=".interfaces.IHtmlBodyContentHeaderViewletManager"
+      template="v_tag_subcat_content_header.pt"
+      layer=".interfaces.ITagPageKind"
+      permission="zope.Public"
+      weight="3"
+      />
+
+  <!-- ************ -->
+  <!-- Body content -->
+  <browser:viewletManager
+      name="post_list_article"
+      provides=".interfaces.IHtmlBodyContentViewletManager"
+      class=".view.ConditionalViewletManager"
+      permission="zope.Public"
+      />
+
+  <browser:viewlet
+      name="default_article"
+      manager=".interfaces.IHtmlBodyContentViewletManager"
+      template="v_generic_article_post_list.pt"
+      layer=".interfaces.ITagPageKind"
+      permission="zope.Public"
+      article_class="tagpage"
+      />
+
+
+  <browser:viewlet
+      name="default_article"
+      manager=".interfaces.IHtmlBodyContentViewletManager"
+      template="v_generic_article_post_list.pt"
+      layer=".interfaces.IAuthorPageKind"
+      permission="zope.Public"
+      article_class="authorpage"
       />
 
   <!-- Body footers -->
@@ -304,7 +391,6 @@
   <browser:viewletManager
       name="body_footer_js"
       provides=".interfaces.IHtmlBodyFooterViewletManager"
-      template="vm_std_replace.pt"
       class="zope.viewlet.manager.WeightOrderedViewletManager"
       permission="zope.Public"
       />
@@ -352,5 +438,14 @@
       name="archiveindex.tmpl"
       layer=".interfaces.IArchiveIndexPageKind"
       />
+
+  <z3c:template
+      template="generic_post_list.pt"
+      name="tag.tmpl" />
+
+  <z3c:template
+      template="generic_post_list.pt"
+      name="author.tmpl" />
+
 
 </configure>
