@@ -10,6 +10,7 @@
   <include package="z3c.macro" file="meta.zcml" />
   <include package="z3c.template" file="meta.zcml" />
   <include package="zope.viewlet" file="meta.zcml" />
+  <include package="nti.nikola_chameleon" file="meta.zcml" />
 
   <z3c:macro name="open_graph_metadata"
              for=".interfaces.IPost"
@@ -358,16 +359,18 @@
 
   <!-- ************ -->
   <!-- Body content -->
+  <browser:newViewletManager
+      id="IPostListArticle" />
   <browser:viewletManager
       name="post_list_article"
-      provides=".interfaces.IHtmlBodyContentViewletManager"
+      provides=".viewlets.IPostListArticle"
       class=".view.ConditionalViewletManager"
       permission="zope.Public"
       />
 
   <browser:viewlet
       name="default_article"
-      manager=".interfaces.IHtmlBodyContentViewletManager"
+      manager=".viewlets.IPostListArticle"
       template="v_generic_article_post_list.pt"
       layer=".interfaces.ITagPageKind"
       permission="zope.Public"
@@ -377,7 +380,7 @@
 
   <browser:viewlet
       name="default_article"
-      manager=".interfaces.IHtmlBodyContentViewletManager"
+      manager=".viewlets.IPostListArticle"
       template="v_generic_article_post_list.pt"
       layer=".interfaces.IAuthorPageKind"
       permission="zope.Public"

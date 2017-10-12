@@ -7,12 +7,12 @@
 	    <nav metal:use-macro="macro:breadcrumbbar" />
         <h1 tal:condition="options/title" tal:content="options/title">Title</h1>
 
-        <p tal:condition="options/post" tal:content="structure:options/post/text">
+        <p tal:condition="context/post" tal:content="structure:context/post/text">
             Post text
         </p>
 
-        <ul tal:condition="options/folders">
-            <li tal:repeat="(href, name) options/folders">
+        <ul tal:condition="context/folders">
+            <li tal:repeat="(href, name) context/folders">
                 <a href="${href}">
                     <i class="icon-folder-open"></i>&nbsp;
                     ${name}
@@ -22,9 +22,9 @@
 
         <div id="gallery_container"></div>
 
-        <noscript tal:condition="options/photo_array">
+        <noscript tal:condition="context/photo_array">
             <ul class="thumbnails">
-                <li tal:repeat="image options/photo_array">
+                <li tal:repeat="image context/photo_array">
                     <a href="$image/url"
                        class="thumbnail image-reference"
                        title="image/title">
