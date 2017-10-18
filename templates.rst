@@ -120,9 +120,47 @@ base_html_body_content_header_navigation_links
 index.tmpl.pt
 =============
 
-Macros Used
------------
+The following macros are used:
 
 index_html_body_content_page_navigation
     Defined in pagination_helper.macro.pt. Produces a ``<div
     class="page-navigation">`` showing index page numbers.
+
+post.tmpl.pt
+============
+
+This is also used for ``page.tmpl`` and ``story.tmpl``, with appropriate macro
+definitions.
+
+The following macros are used:
+
+post_html_body_content_header
+    The very first thing rendered inside the content slot, just above
+    the actual text of the post.
+
+    This in turn calls two macros:
+
+    post_html_body_content_title_author_meta
+        Render the title, author, date and other metadata. This uses
+        the macro ``post_html_body_content_title``, which is also used
+        in ``page.tmpl`` and ``story.tmpl``.
+    post_html_translations
+        Present a visible list of translations for this post.
+
+    For pages and stories, this calls ``post_html_body_content_title``
+    instead. They get a css class of 'pagepage' and 'storypage', respectively.
+
+post_html_body_content_tags
+    The tag list for the post. Rendered below it.
+post_html_body_content_pager
+    Paging for posts.
+post_comment_form
+    Wraps the generic ``comment_form``. Rendered below the text, tags,
+    and pagers.
+
+The default viewlet extra head used for posts includes these macros;
+it is not expected that these will need to be replaced.
+
+- post_html_head_open_graph_metadata
+- post_html_head_twitter_card_information
+- post_html_head_meta_translations

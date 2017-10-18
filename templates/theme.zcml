@@ -12,43 +12,6 @@
   <include package="zope.viewlet" file="meta.zcml" />
   <include package="nti.nikola_chameleon" file="meta.zcml" />
 
-  <z3c:macro name="open_graph_metadata"
-             for=".interfaces.IPost"
-             view="*"
-             template="post_helper.pt"
-             layer="*" />
-
-  <z3c:macro name="html_tags"
-             for=".interfaces.IPost"
-             view="*"
-             template="post_helper.pt"
-             layer="*" />
-
-  <z3c:macro name="html_body_content_pager"
-             for=".interfaces.IPost"
-             view="*"
-             template="post_helper.pt"
-             layer="*" />
-
-  <z3c:macro name="twitter_card_information"
-             for=".interfaces.IPost"
-             view="*"
-             template="post_helper.pt"
-             layer="*" />
-
-
-  <z3c:macro name="meta_translations"
-             for=".interfaces.IPost"
-             view="*"
-             template="post_helper.pt"
-             layer="*" />
-
-  <z3c:macro name="post_html_translations"
-             for=".interfaces.IPost"
-             view="*"
-             template="post_header.macro.pt"
-             layer="*" />
-
   <z3c:macro name="html_body_content_archive_navigation"
              macro="html_body_content_archive_navigation_IArchivePageKind"
              for="*"
@@ -218,6 +181,22 @@
       layer=".interfaces.IPagePageKind"
       weight="0"
       />
+
+  <!-- And don't output the metadata section on PagePageKind -->
+  <z3c:macro name="post_html_body_content_header"
+             macro="page_html_body_content_header"
+             for="*"
+             view="*"
+             layer=".interfaces.IPagePageKind"
+             template="post_header.macro.pt" />
+
+  <z3c:macro name="post_html_body_content_postpromonav"
+             macro="page_html_body_content_postpromonav"
+             for="*"
+             view="*"
+             layer=".interfaces.IPagePageKind"
+             template="post_header.macro.pt" />
+
 
   <browser:viewlet
       name="default_extra_head"
@@ -452,5 +431,14 @@
       template="generic_post_list.pt"
       name="author.tmpl" />
 
+  <z3c:template
+      template="post.tmpl.pt"
+      name="page.tmpl"
+      layer=".interfaces.IPagePageKind" />
+
+  <z3c:template
+      template="post.tmpl.pt"
+      name="story.tmpl"
+      layer=".interfaces.IStoryPageKind" />
 
 </configure>
