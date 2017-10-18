@@ -13,20 +13,29 @@ Conventions
 - Talk about conventions: naming, macro and viewlet use, etc.
 
 Macros should be named in three parts: the name of the template that
-uses them, the selector-like path to the part of the page where they
-are used, and lastly their function. So a macro used in the base
-template directly inside the ``<html>`` element to produce the
-``<heod>`` element would be called ``base_html_head``, while one used
-in the ``content`` ``<div>`` inside the ``<body>`` tag (which is
-nested inside the ``<html>`` element) to produce content header would
-be called ``base_html_body_content_header``. (Portions of the selector
-may be left out if the name would be too unwieldy, if it's still
+uses them (if they are used by only one template), the selector-like
+path to the part of the page where they are used, and lastly their
+function. So a macro used in the base template directly inside the
+``<html>`` element to produce the ``<heod>`` element would be called
+``base_html_head``, while one used in the ``content`` ``<div>`` inside
+the ``<body>`` tag (which is nested inside the ``<html>`` element) to
+produce content header would be called
+``base_html_body_content_header``. (Portions of the selector may be
+left out if the name would be too unwieldy, if it's still
 unambiguous.)
+
+If a macro is globally defined and meant to be used from many
+templates, it will omit the template name portion.
 
 Macros
 ======
 
-Describe each global macro.
+Describe each global macro if not otherwise described.
+
+html_body_content_breadcrumbbar
+    From crumbs.macro.pt. Produces a ``<nav>`` containing an ``<ul>``
+    with a ``<li>`` for each item in the ``crumbs`` variable. Used by
+    gallery.tmpl.pt and listing.tmpl.pt.
 
 Viewlets
 ========
