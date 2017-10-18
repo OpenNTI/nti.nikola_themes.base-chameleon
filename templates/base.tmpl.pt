@@ -22,14 +22,14 @@
                i18n:translate="">
                 Skip to main content
             </a>
-            <metal:block metal:use-macro="macro:base_html_nav_menu" />
-            <metal:block metal:use-macro="macro:base_html_page_header" />
+            <metal:block metal:use-macro="macro:base_html_body_nav_menu" />
+            <metal:block metal:use-macro="macro:base_html_body_page_header" />
             <div class="container" id="content" role="main">
                 <div class="body-content">
                     <div class="row">
-                        <metal:block metal:use-macro="macro:base_html_content_header" />
+                        <metal:block metal:use-macro="macro:base_html_body_content_header" />
                         <div metal:define-slot="content" ></div>
-                        <metal:block metal:use-macro="macro:base_html_content_footer" />
+                        <metal:block metal:use-macro="macro:base_html_body_content_footer" />
                     </div>
                 </div>
             </div>

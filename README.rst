@@ -17,8 +17,11 @@ uses them, the selector-like path to the part of the page where they
 are used, and lastly their function. So a macro used in the base
 template directly inside the ``<html>`` element to produce the
 ``<heod>`` element would be called ``base_html_head``, while one used
-in the ``<body>`` tag (which is nested inside the ``<html>`` element)
-to produce content header would be called ``base_html_body_content_header``.
+in the ``content`` ``<div>`` inside the ``<body>`` tag (which is
+nested inside the ``<html>`` element) to produce content header would
+be called ``base_html_body_content_header``. (Portions of the selector
+may be left out if the name would be too unwieldy, if it's still
+unambiguous.)
 
 Macros
 ======
@@ -64,15 +67,15 @@ Macros Used
 
 base_html_head
     Produces the complete ``<head>`` element.
-base_html_nav_menu
+base_html_body_nav_menu
     Inside the ``<body>``, write navigation menu.
-base_html_page_header
+base_html_body_page_header
     After navigation, produce any header information before the main
     body content.
-base_html_content_header
+base_html_body_content_header
     After the page header, in the section of the body devoted to
     content, before the ``content`` slot is filled.
-base_html_content_footer
+base_html_body_content_footer
     After the ``content`` slot, within the section of the body devoted
     to content.
 
