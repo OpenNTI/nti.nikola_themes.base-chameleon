@@ -11,7 +11,7 @@ Also dropping translation support.
 -->
 
 <head
-    metal:define-macro="html_headstart"
+    metal:define-macro="base_html_head"
     tal:define="use_base_tag options/use_base_tag|nothing;
                 description options/description|nothing;
                 abs_link nocall:options/abs_link;

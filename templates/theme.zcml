@@ -392,14 +392,14 @@
   <!-- The main body template puts this after the content to include
        additional javascript -->
   <browser:viewletManager
-      name="body_footer_js"
+      name="base_html_body_footer"
       provides=".interfaces.IHtmlBodyFooterViewletManager"
       class="zope.viewlet.manager.WeightOrderedViewletManager"
       permission="zope.Public"
       />
 
   <browser:viewlet
-      name="generic_body_footer_js"
+      name="generic_base_html_body_footer"
       manager=".interfaces.IHtmlBodyFooterViewletManager"
       template="v_body_footer.pt"
       permission="zope.Public"
@@ -407,7 +407,7 @@
       />
 
   <browser:viewlet
-      name="extra_body_footer_js"
+      name="extra_base_html_body_footer"
       manager=".interfaces.IHtmlBodyFooterViewletManager"
       template="v_body_footer_extra_js.pt"
       permission="zope.Public"
@@ -416,7 +416,7 @@
 
   <!-- book adds body footers -->
   <browser:viewlet
-      name="default_body_footer_js"
+      name="default_base_html_body_footer"
       manager=".interfaces.IHtmlBodyFooterViewletManager"
       layer=".interfaces.IBookPageKind"
       permission="zope.Public"
@@ -426,7 +426,7 @@
 
   <!-- gallery adds body footers -->
   <browser:viewlet
-      name="default_body_footer_js"
+      name="default_base_html_body_footer"
       manager=".interfaces.IHtmlBodyFooterViewletManager"
       layer=".interfaces.IGalleryPageKind"
       permission="zope.Public"

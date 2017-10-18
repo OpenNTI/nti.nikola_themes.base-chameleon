@@ -3,7 +3,7 @@
              xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
 
-<metal:block metal:define-macro="html_footer">
+<metal:block metal:define-macro="base_html_content_footer">
     <footer id="footer" tal:condition="options/content_footer">
         <p tal:content="structure options/content_footer">
 			The footer.
