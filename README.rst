@@ -89,6 +89,22 @@ comment_form
 These macros are specialized for particular comment systems as needed.
 (Currently only disqus is supported.)
 
+Math
+~~~~
+
+There are two macros defined for dealing with math rendering:
+
+math_html_extra_head_scripts
+   Insert any necessary scripts for rendering into the head. This is
+   typically included in the ``extra_head`` viewlet.
+math_html_body_content_scripts
+   Insert any extra scripts needed for rendering. This is usually
+   placed at the end of the content section, next to the
+   ``comment_link_script``
+
+There are two variants of these macros, one defined for when the
+context actually needs MathJax or KaTeX, and one for when it doesn't,
+to avoid bloating pages when not needed.
 
 Viewlets
 ========

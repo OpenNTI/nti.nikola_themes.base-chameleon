@@ -69,7 +69,7 @@
     </div>
 
     <metal:block metal:use-macro="macro:html_body_content_pager" />
-    <metal:block metal:use-macro="macro:math_scripts" />
+    <metal:block metal:use-macro="macro:math_html_body_content_scripts" />
 
 </metal:block>
 

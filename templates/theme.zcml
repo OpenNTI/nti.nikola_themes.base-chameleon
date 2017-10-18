@@ -124,14 +124,14 @@
              template="comments.pt" />
 
   <!-- Math -->
-  <z3c:macro name="math_scripts"
-             macro="math_scripts_mathjax"
+  <z3c:macro name="math_html_body_content_scripts"
+             macro="math_html_body_content_scripts_mathjax"
              for=".interfaces.INeedsMathJax"
              view="*"
              template="math_helper.macro.pt"
              layer="*" />
-  <z3c:macro name="math_styles"
-             macro="math_styles_mathjax"
+  <z3c:macro name="math_html_extra_head_scripts"
+             macro="math_html_extra_head_scripts_mathjax"
              for=".interfaces.INeedsMathJax"
              view="*"
              template="math_helper.macro.pt"

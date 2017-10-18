@@ -113,7 +113,7 @@
 
 ### This function is deprecated; use math_helper directly.
 <metal:block metal:define-macro="mathjax_script(post)">
-    ${math.math_scripts_ifpost(post)}
+    ${math.math_html_body_content_scripts_ifpost(post)}
 </metal:block>
 -->
 </metal:block>
