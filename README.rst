@@ -36,6 +36,11 @@ html_body_content_breadcrumbbar
     From crumbs.macro.pt. Produces a ``<nav>`` containing an ``<ul>``
     with a ``<li>`` for each item in the ``crumbs`` variable. Used by
     gallery.tmpl.pt and listing.tmpl.pt.
+html_body_content_archive_navigation
+    From archive_navigation_helper.pt. Produces a ``<nav>`` containing
+    a ``<ul>`` with a ``<li>`` for the previous, next, and parent
+    archive. Used in list.tmpl.pt and list_post.tmpl.pt for
+    IArchivePageKind pages.
 
 Viewlets
 ========

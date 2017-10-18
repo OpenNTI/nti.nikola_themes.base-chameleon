@@ -61,8 +61,8 @@
              template="post_header.macro.pt"
              layer="*" />
 
-  <z3c:macro name="archive_navigation"
-             macro="archive_navigation_IArchivePageKind"
+  <z3c:macro name="html_body_content_archive_navigation"
+             macro="html_body_content_archive_navigation_IArchivePageKind"
              for="*"
              view="*"
              template="archive_navigation_helper.macro.pt"
