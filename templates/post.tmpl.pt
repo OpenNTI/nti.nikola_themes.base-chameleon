@@ -16,7 +16,7 @@
   <aside class="postpromonav">
     <nav>
       <metal:block use-macro="macro:html_tags" />
-      <metal:block use-macro="macro:html_pager" />
+      <metal:block use-macro="macro:html_body_content_pager" />
     </nav>
   </aside>
   <section class="comments hidden-print"

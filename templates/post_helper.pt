@@ -50,7 +50,7 @@
     </ul>
 </metal:block>
 
-<metal:block metal:define-macro="html_pager"
+<metal:block metal:define-macro="html_body_content_pager"
              tal:define="post context">
   <ul class="pager hidden-print"
       tal:condition="python:post.prev_post or post.next_post">

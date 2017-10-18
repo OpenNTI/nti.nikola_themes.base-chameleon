@@ -12,6 +12,14 @@ Conventions
 
 - Talk about conventions: naming, macro and viewlet use, etc.
 
+.. _all-macros:
+
+Macros
+======
+
+Naming Macros
+-------------
+
 Macros should be named in three parts: the name of the template that
 uses them (if they are used by only one template), the selector-like
 path to the part of the page where they are used, and lastly their
@@ -25,12 +33,15 @@ left out if the name would be too unwieldy, if it's still
 unambiguous.)
 
 If a macro is globally defined and meant to be used from many
-templates, it will omit the template name portion.
+templates, it may omit the template name portion.
 
-Macros
-======
+Global Macros
+-------------
 
-Describe each global macro if not otherwise described.
+These may be used in different page types.
+
+Navigation
+~~~~~~~~~~
 
 html_body_content_breadcrumbbar
     From crumbs.macro.pt. Produces a ``<nav>`` containing an ``<ul>``
@@ -41,6 +52,43 @@ html_body_content_archive_navigation
     a ``<ul>`` with a ``<li>`` for the previous, next, and parent
     archive. Used in list.tmpl.pt and list_post.tmpl.pt for
     IArchivePageKind pages.
+html_body_content_pager
+    Produces a ``<ul class="pager">`` with entries for previous and
+    next pages. There is a generic version used in indexes and a
+    version specialized for use in post pages.
+
+Comments
+~~~~~~~~
+
+.. note:: These do not yet follow the naming conventions. This may be changed.
+
+There are three macros defined for comments:
+
+comment_link
+    Produce a link to the comments for a single post. This is used in
+    index.tmpl.pt, where it is re-bound for every post:
+    ``post/@@macros/comment_link``.
+
+    This will set the global variable 'need_comment_script' to the context if
+    they have ever been invoked and produced output while rendering a
+    template. (Since we can only have one comment system at a time,
+    this is idempotent.) You can then traverse that to get the script::
+
+        <div tal:define="global need_comment_script nothing"
+             tal:repeat="post posts">
+          <metal:block metal:use-macro="post/@@macros/comment_link" />
+        </div>
+        <metal:block metal:use-macro="comment_link_post/@@macros/comment_link_script"
+                     tal:condition="need_comment_script">
+comment_link_script
+    Used in the body of pages that will be displaying comments. This
+    produces the correct scripts.
+comment_form
+     Produces the HTML for viewing and adding comments.
+
+These macros are specialized for particular comment systems as needed.
+(Currently only disqus is supported.)
+
 
 Viewlets
 ========
@@ -50,52 +98,4 @@ Describe each global viewlet manager.
 Templates
 =========
 
-Describe each template.
-
-base.tmpl.pt
-------------
-
-This template is the main "layout" template. It defines one macro
-called "base". Other templates are generally expected to use this like
-so::
-
-  <html metal:use-macro="context/@@base.tmpl/index/macros/base"
-        xmlns:tal="http://xml.zope.org/namespaces/tal"
-        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-	    xmlns:metal="http://xml.zope.org/namespaces/metal">
-     ...
-  </html>
-
-Slots
-~~~~~
-
-doctype
-    The complete value to use for the opening doctype statement.
-    Defaults to ``<!DOCTYPE html>``.
-content
-    The main slot where body content will go. Most templates will fill
-    this slot.
-
-Macros Used
-~~~~~~~~~~~
-
-base_html_head
-    Produces the complete ``<head>`` element.
-base_html_body_nav_menu
-    Inside the ``<body>``, write navigation menu.
-base_html_body_page_header
-    After navigation, produce any header information before the main
-    body content.
-base_html_body_content_header
-    After the page header, in the section of the body devoted to
-    content, before the ``content`` slot is filled.
-base_html_body_content_footer
-    After the ``content`` slot, within the section of the body devoted
-    to content.
-
-Viewlets Used
-~~~~~~~~~~~~~
-
-base_html_body_footer
-    After the content footer, but immediately before the close of the
-    body. Viewlets will commonly put extra JavaScript tags here.
+Templates are described in more detail in templates.rst.

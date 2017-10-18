@@ -68,7 +68,7 @@
               tal:condition="need_comment_script" />
     </div>
 
-    <metal:block metal:use-macro="macro:html_pager" />
+    <metal:block metal:use-macro="macro:html_body_content_pager" />
     <metal:block metal:use-macro="macro:math_scripts_ifposts" />
 
 
