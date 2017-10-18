@@ -116,3 +116,13 @@ base_html_body_content_header_translation
 base_html_body_content_header_navigation_links
    Produces a ``<nav id="menu">`` containing nested ``<ul>`` for the
    defined navigation links.
+
+index.tmpl.pt
+=============
+
+Macros Used
+-----------
+
+index_html_body_content_page_navigation
+    Defined in pagination_helper.macro.pt. Produces a ``<div
+    class="page-navigation">`` showing index page numbers.

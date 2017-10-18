@@ -21,7 +21,7 @@
 		   metal:use-macro="macro:post_comment_form">
     Comment form would go here.
   </section>
-  <metal:block metal:use-macro="macro:math_scripts_ifpost" />
+  <metal:block metal:use-macro="macro:math_scripts" />
   <metal:block metal:use-macro="macro:comment_link_script" />
 </article>
 </html>

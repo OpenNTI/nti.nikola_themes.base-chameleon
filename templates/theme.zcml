@@ -43,18 +43,6 @@
              template="post_helper.pt"
              layer="*" />
 
-  <z3c:macro name="math_scripts_ifpost"
-             for=".interfaces.IPost"
-             view="*"
-             template="math_helper.macro.pt"
-             layer="*" />
-
-  <z3c:macro name="math_styles_ifpost"
-             for=".interfaces.IPost"
-             view="*"
-             template="math_helper.macro.pt"
-             layer="*" />
-
   <z3c:macro name="post_html_translations"
              for=".interfaces.IPost"
              view="*"
@@ -134,6 +122,20 @@
              view=".interfaces.ICommentKindNone"
              layer="*"
              template="comments.pt" />
+
+  <!-- Math -->
+  <z3c:macro name="math_scripts"
+             macro="math_scripts_mathjax"
+             for=".interfaces.INeedsMathJax"
+             view="*"
+             template="math_helper.macro.pt"
+             layer="*" />
+  <z3c:macro name="math_styles"
+             macro="math_styles_mathjax"
+             for=".interfaces.INeedsMathJax"
+             view="*"
+             template="math_helper.macro.pt"
+             layer="*" />
 
 
   <!-- Viewlets and Viewlet managers -->
