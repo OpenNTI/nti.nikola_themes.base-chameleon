@@ -86,9 +86,9 @@
   </p>
 </metal:block>
 
-<metal:block metal:define-macro="html_posts_postlist">
-    <ul class="postlist" tal:condition="options/posts">
-      <li tal:repeat="post options/posts"
+<metal:block metal:define-macro="post_html_body_content_postlist">
+    <ul class="postlist" tal:condition="context">
+      <li tal:repeat="post context"
           tal:define="date_format options/date_format">
         <time class="listdate"
               tal:define="date post/formatted_date:?date_format"
@@ -99,7 +99,7 @@
            class="listtitle">${post/title}</a>
       </li>
     </ul>
-    <p tal:condition="not:options/posts" i18n:translate="">No posts found.</p>
+    <p tal:condition="not:context" i18n:translate="">No posts found.</p>
 </metal:block>
 
 

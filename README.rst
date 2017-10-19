@@ -106,10 +106,26 @@ There are two variants of these macros, one defined for when the
 context actually needs MathJax or KaTeX, and one for when it doesn't,
 to avoid bloating pages when not needed.
 
+Post List Macros
+~~~~~~~~~~~~~~~~
+
+These are useful for when the context is an IPostList.
+
+post_html_body-Content_postlist
+    Produce a list of posts showing date and title. This is used in
+    the generic post list template (for tags.tmpl and author.tmpl) and
+    in list_post.tmpl.pt.
+
 Viewlets
 ========
 
-Describe each global viewlet manager.
+Article Lists
+-------------
+
+We register a new viewlet manager type called ``IPostListArticle`` and
+an instance of this manager named ``post_list_article``. This is used
+by the ``generic_post_list.pt`` template to implement the
+``tags.tmpl`` and ``author.tmpl`` pages.
 
 Templates
 =========

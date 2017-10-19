@@ -10,6 +10,23 @@ described in `the Nikola documentation
 We will mention specific templates when there is something important
 to say about them.
 
+Missing Templates
+=================
+
+Some of the default templates that come with Nikola do not exist on
+disk in this theme. Usually this means that the templates were just
+slight variations of each other. Here we've been able to parameterize them
+into macros and viewlets so that they can be based on a common
+template. This makes maintenance and extensions easier.
+
+The templates that are missing are:
+
+archiveindex.tmpl
+  Replaced with index.tmpl.pt
+tag.tmpl, author.tmpl
+  Replaced with generic_post_list.pt
+page.tmpl, story.tmpl
+  Combined into post.tmpl.pt.
 
 base.tmpl.pt
 ============

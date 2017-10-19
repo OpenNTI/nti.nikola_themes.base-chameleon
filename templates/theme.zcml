@@ -111,7 +111,7 @@
   <browser:viewletManager
       name="extra_head"
       provides=".interfaces.IHtmlHeadViewletManager"
-      class="zope.viewlet.manager.WeightOrderedViewletManager"
+      class=".view.ConditionalViewletManager"
       permission="zope.Public"
       />
 
@@ -375,7 +375,7 @@
   <browser:viewletManager
       name="base_html_body_footer"
       provides=".interfaces.IHtmlBodyFooterViewletManager"
-      class="zope.viewlet.manager.WeightOrderedViewletManager"
+      class=".view.ConditionalViewletManager"
       permission="zope.Public"
       />
 
