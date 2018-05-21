@@ -423,6 +423,15 @@
       layer=".interfaces.IArchiveIndexPageKind"
       />
 
+  <!-- Nikola 8 also produces IArchivePageKind in cases where v7 did not, so we need an alias for
+       that as well. -->
+  <z3c:template
+      template="index.tmpl.pt"
+      name="archiveindex.tmpl"
+      layer=".interfaces.IArchivePageKind"
+      />
+
+
   <z3c:template
       template="generic_post_list.pt"
       name="tag.tmpl" />
