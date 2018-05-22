@@ -2,13 +2,14 @@
 <html metal:use-macro="context/@@base.tmpl/index/macros/base"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
-	  xmlns:metal="http://xml.zope.org/namespaces/metal">
+      xmlns:metal="http://xml.zope.org/namespaces/metal">
 
 <article metal:fill-slot="content"
-		 tal:define="post context"
-		 class="post-${context/meta:type} h-entry hentry
-				${context/@@post_css/pagekind_class}"
-		 itemscope="itemscope" itemtype="http://schema.org/Article">
+         tal:define="post context"
+         class="post-${context/meta:type} h-entry hentry
+                nti-extra-${context/meta:nti-extra-page-kind}
+                ${context/@@post_css/pagekind_class}"
+         itemscope="itemscope" itemtype="http://schema.org/Article">
   <metal:block metal:use-macro="macro:post_html_body_content_header" />
   <div class="e-content entry-content" itemprop="articleBody text">
     ${structure:context/text}
@@ -21,7 +22,7 @@
     </nav>
   </aside>
   <section class="comments hidden-print"
-		   metal:use-macro="macro:post_comment_form">
+           metal:use-macro="macro:post_comment_form">
     Comment form would go here.
   </section>
   <metal:block use-macro="macro:math_html_body_content_scripts" />
