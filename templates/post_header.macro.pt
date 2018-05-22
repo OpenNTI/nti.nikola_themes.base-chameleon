@@ -107,6 +107,7 @@
              tal:define="post context;
                          blog_title options/blog_title;
                          abs_link nocall:options/abs_link;
+                         url_replacer nocall:options/url_replacer;
                          permalink options/permalink;">
   <!--! Post is the context; use_open_graph used to be optional, is
       now always true. -->
@@ -121,7 +122,7 @@
         tal:condition="not:post/description" />
 
   <meta property="og:image"
-        content="${url_replacer(permalink, post.previewimage, lang,
+        content="${python:url_replacer(permalink, post.previewimage, options['lang'],
                  'absolute')}"
         tal:condition="post/previewimage" />
 

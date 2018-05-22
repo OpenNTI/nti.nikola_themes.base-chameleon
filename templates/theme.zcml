@@ -450,6 +450,36 @@
       />
 
 
+  <browser:newViewletManager
+      id="IHtmlBodyAfterContentViewletManager" />
+  <browser:viewletManager
+      name="base_html_body_after_content"
+      provides=".viewlets.IHtmlBodyAfterContentViewletManager"
+      class=".view.ConditionalViewletManager"
+      permission="zope.Public"
+      />
+
+
+  <browser:newViewletManager
+      id="IHtmlBodyBeforeContentContainerViewletManager" />
+  <browser:viewletManager
+      name="base_html_body_before_content_container"
+      provides=".viewlets.IHtmlBodyBeforeContentContainerViewletManager"
+      class=".view.ConditionalViewletManager"
+      permission="zope.Public"
+      />
+
+
+  <browser:newViewletManager
+      id="IHtmlBodyAfterContentContainerViewletManager" />
+  <browser:viewletManager
+      name="base_html_body_after_content_container"
+      provides=".viewlets.IHtmlBodyAfterContentContainerViewletManager"
+      class=".view.ConditionalViewletManager"
+      permission="zope.Public"
+      />
+
+
   <z3c:template
       template="post.tmpl.pt"
       name="page.tmpl"

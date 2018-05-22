@@ -25,17 +25,20 @@
             <metal:block metal:use-macro="macro:base_html_body_nav_menu" />
             <metal:block metal:use-macro="macro:base_html_body_page_header" />
 
-            <metal:block tal:replace="structure provider:base_html_body_before_content" />
+            <metal:block tal:replace="structure provider:base_html_body_before_content_container" />
 
             <div class="container" id="content" role="main">
                 <div class="body-content">
                     <div class="row">
                         <metal:block metal:use-macro="macro:base_html_body_content_header" />
+                        <metal:block tal:replace="structure provider:base_html_body_before_content" />
                         <div metal:define-slot="content" ></div>
+                        <metal:block tal:replace="structure provider:base_html_body_after_content" />
                         <metal:block metal:use-macro="macro:base_html_body_content_footer" />
                     </div>
                 </div>
             </div>
+            <metal:block tal:replace="structure provider:base_html_body_after_content_container" />
 
             <metal:block tal:replace="structure provider:base_html_body_footer" />
 
