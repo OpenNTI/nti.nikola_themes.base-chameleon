@@ -24,6 +24,9 @@
             </a>
             <metal:block metal:use-macro="macro:base_html_body_nav_menu" />
             <metal:block metal:use-macro="macro:base_html_body_page_header" />
+
+            <metal:block tal:replace="structure provider:base_html_body_before_content" />
+
             <div class="container" id="content" role="main">
                 <div class="body-content">
                     <div class="row">

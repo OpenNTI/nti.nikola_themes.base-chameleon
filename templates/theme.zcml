@@ -440,6 +440,16 @@
       template="generic_post_list.pt"
       name="author.tmpl" />
 
+  <browser:newViewletManager
+      id="IHtmlBodyBeforeContentViewletManager" />
+  <browser:viewletManager
+      name="base_html_body_before_content"
+      provides=".viewlets.IHtmlBodyBeforeContentViewletManager"
+      class=".view.ConditionalViewletManager"
+      permission="zope.Public"
+      />
+
+
   <z3c:template
       template="post.tmpl.pt"
       name="page.tmpl"
