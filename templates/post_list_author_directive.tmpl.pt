@@ -6,11 +6,10 @@
     <div id="${post_list_id}" class="post-list post-list-author"
          tal:condition="options/posts">
         <ul class="post-list"
-            tal:define="date_format options/date_format;
-                        lang options/lang">
+            tal:define="date_format options/date_format">
             <li class="post-list-item"
                 tal:repeat="post options/posts">
-                <a href="${python:post.permalink(lang)}">${python:post.title(lang)}</a>
+                <a href="${post/permalink}">${post/title}</a>
                 &mdash; ${post/author}
                 &nbsp; (${post/formatted_date:?date_format})
             </li>
