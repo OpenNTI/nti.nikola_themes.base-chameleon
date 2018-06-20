@@ -49,7 +49,11 @@
                 <tal:block tal:content="structure:ul_opens" />
 
                 <tal:block tal:content="structure:li_open" />
-                <a class="reference badge" href="${link}">${text}</a>
+                <a class="reference badge" href="${link}"
+                   tal:content="structure:text">
+                    This is the description of the category.
+                    It can include HTML.
+                </a>
                 <tal:block tal:condition="python:indent_change_after &lt;= 0">
                     <tal:block tal:content="structure:li_close" />
                 </tal:block>
@@ -68,7 +72,11 @@
     <ul class="list-inline" tal:condition="items">
         <tal:block tal:repeat="(text,link) items">
             <li tal:condition="python:text not in hidden_tags">
-                <a class="reference badge" href="${link}">${text}</a>
+                <a class="reference badge" href="${link}"
+                   tal:content="structure:text">
+                    This is the description of the tag.
+                    It can include HTML.
+                </a>
             </li>
         </tal:block>
     </ul>

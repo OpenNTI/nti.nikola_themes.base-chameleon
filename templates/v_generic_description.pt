@@ -1,5 +1,5 @@
 <p tal:condition="options/description"
-   tal:content="options/description"
+   tal:content="structure:options/description"
    class="description"
    xmlns:tal="http://xml.zope.org/namespaces/tal">
     A Description
