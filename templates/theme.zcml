@@ -243,6 +243,7 @@
       weight="0"
       />
 
+
   <!-- books get extra -->
   <browser:viewlet
       name="book_extra_head"
@@ -394,6 +395,16 @@
       permission="zope.Public"
       weight="1"
       />
+
+  <browser:viewlet
+      name="default_extra_head"
+      manager=".interfaces.IHtmlBodyFooterViewletManager"
+      template="v_tags_footer_extra_js.pt"
+      permission="zope.Public"
+      layer=".interfaces.ITagsPageKind"
+      weight="1"
+      />
+
 
   <!-- book adds body footers -->
   <browser:viewlet

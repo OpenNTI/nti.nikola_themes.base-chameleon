@@ -2,4 +2,6 @@
            tal:define="kind options/kind|nothing;
                        feeds context/@@feeds">
   ${structure:python:feeds.feed_translations_head(kind=kind , feeds=False)}
+  <link href="/assets/css/tx3-tag-cloud.css" rel="stylesheet" type="text/css" />
+
 </tal:block>

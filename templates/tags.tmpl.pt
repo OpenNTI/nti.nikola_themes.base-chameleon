@@ -9,38 +9,24 @@
 <article class="tagindex"
          metal:fill-slot="content"
          tal:define="cat_items options/cat_items|nothing;
-                     items python:options.get('items');
+                     items options/items_with_postcount|nothing;
                      hidden_tags options/hidden_tags">
-  <!--! we use options.get('items') because the default path_traverse
-      from z3c.pt.expressions will fallback to DefaultTraversable if
-      the key is not found in the dict. DT, in turn, first attempts
-      getattr(), which would locate the dict.items() method, which
-      path_traverse would then happily call, giving us the wrong thing.
 
-      A better fix is probably to register a custom Traversable for a
-      dict that doesn't do that.
-  -->
     <header>
         <h1>${options/title}</h1>
         <div class="metadata">
             <!--! ${feeds_translations.translation_link(kind)} -->
         </div>
     </header>
-    <tal:block tal:condition="cat_items">
+    <tal:block tal:condition="cat_items"
+               tal:define="cat_items_with_postcount options/cat_items_with_postcount|nothing">
         <h2 tal:condition="items" i18n:translate="">Categories</h2>
         <!--!
             XXX: The below does crazy things, potentially generating
             badly invalid HTML. Please don't do this.
         -->
-        <tal:block tal:repeat="cat options/cat_hierarchy">
-            <tal:block tal:define="text python:cat[0];
-                                   full_name python:cat[1];
-                                   path python:cat[2];
-                                   link python:cat[3];
-                                   indent_levels python:cat[4];
-                                   indent_change_before python:cat[5];
-                                   indent_change_after python:cat[6];
-                                   ul_open string:&lt;ul class=&quot;list-inline&quot;&gt;;
+        <tal:block tal:repeat="(text, full_name, path, link, indent_levels, indent_change_before, indent_change_after, num_kids, num_posts) options/cat_hierarchy_with_postcount">
+            <tal:block tal:define="ul_open string:&lt;ul &gt;;
                                    ul_opens python:ul_open * indent_change_before;
                                    li_open string:&lt;li&gt;;
                                    li_close string:&lt;/li&gt;;
@@ -49,11 +35,11 @@
                 <tal:block tal:content="structure:ul_opens" />
 
                 <tal:block tal:content="structure:li_open" />
-                <a class="reference badge" href="${link}"
+                <a class="reference" data-weight="${num_posts}" href="${link}"
                    tal:content="structure:text">
                     This is the description of the category.
                     It can include HTML.
-                </a>
+                </a> (${num_posts}) <br /> ${structure:view/templates/site/config/CATEGORY_DESCRIPTIONS/en/?full_name|nothing}
                 <tal:block tal:condition="python:indent_change_after &lt;= 0">
                     <tal:block tal:content="structure:li_close" />
                 </tal:block>
@@ -69,10 +55,10 @@
 
         <h2 tal:condition="items" i18n:translate="">Tags</h2>
     </tal:block>
-    <ul class="list-inline" tal:condition="items">
-        <tal:block tal:repeat="(text,link) items">
-            <li tal:condition="python:text not in hidden_tags">
-                <a class="reference badge" href="${link}"
+    <ul class="list-inline" id="tagcloud" tal:condition="items">
+        <tal:block tal:repeat="(text,link,postcount) items">
+            <li data-weight="${postcount}" tal:condition="python:text not in hidden_tags">
+                <a class="reference" href="${link}"
                    tal:content="structure:text">
                     This is the description of the tag.
                     It can include HTML.

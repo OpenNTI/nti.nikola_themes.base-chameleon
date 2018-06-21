@@ -1,0 +1,9 @@
+<tal:block xmlns:tal="http://xml.zope.org/namespaces/tal">
+    <script type="text/javascript"
+            src="/assets/js/jquery.tx3-tag-cloud.js"></script>
+    <script>
+    $("#tagcloud").tx3TagCloud({
+	multiplier: 5 // default multiplier is "1"
+	});
+    </script>
+</tal:block>
