@@ -55,25 +55,29 @@
 
         <h2 tal:condition="items" i18n:translate="">Tags</h2>
     </tal:block>
-    <ul class="list-inline tx3-tag-cloud" tal:condition="items">
-        <?python
-        max_posts = max((i[2] for i in items))
-        min_posts = min((i[2] for i in items))
-        ?>
-        <tal:block tal:repeat="(text,link,postcount) items">
-            <li data-weight="${postcount}"
-                tal:condition="python:text not in hidden_tags"
-                tal:define="percent python:abs((postcount - min_posts)/(min_posts - max_posts));
-                            size python:str(1 + 5 * percent) + 'em';"
-                style="font-size: ${size}">
-                <a class="reference" href="${link}"
-                   tal:content="structure:text">
-                    This is the description of the tag.
-                    It can include HTML.
-                </a>
-            </li>
-        </tal:block>
-    </ul>
+    <div class="row" tal:condition="items">
+        <div class="col-xs-12">
+            <ul class="list-inline tx3-tag-cloud">
+                <?python
+                  max_posts = max((i[2] for i in items))
+                  min_posts = min((i[2] for i in items))
+                ?>
+                <tal:block tal:repeat="(text,link,postcount) items">
+                    <li data-weight="${postcount}"
+                        tal:condition="python:text not in hidden_tags"
+                        tal:define="percent python:abs((postcount - min_posts)/(min_posts - max_posts));
+                                    size python:str(1 + 5 * percent) + 'em';"
+                                    style="font-size: ${size}">
+                                    <a class="reference" href="${link}"
+                                       tal:content="structure:text">
+                                        This is the description of the tag.
+                                        It can include HTML.
+                                    </a>
+                    </li>
+                </tal:block>
+            </ul>
+        </div>
+    </div>
 
 </article>
 
