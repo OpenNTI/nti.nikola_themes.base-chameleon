@@ -55,9 +55,17 @@
 
         <h2 tal:condition="items" i18n:translate="">Tags</h2>
     </tal:block>
-    <ul class="list-inline" id="tagcloud" tal:condition="items">
+    <ul class="list-inline tx3-tag-cloud" tal:condition="items">
+        <?python
+        max_posts = max((i[2] for i in items))
+        min_posts = min((i[2] for i in items))
+        ?>
         <tal:block tal:repeat="(text,link,postcount) items">
-            <li data-weight="${postcount}" tal:condition="python:text not in hidden_tags">
+            <li data-weight="${postcount}"
+                tal:condition="python:text not in hidden_tags"
+                tal:define="percent python:abs((postcount - min_posts)/(min_posts - max_posts));
+                            size python:str(1 + 5 * percent) + 'em';"
+                style="font-size: ${size}">
                 <a class="reference" href="${link}"
                    tal:content="structure:text">
                     This is the description of the tag.
