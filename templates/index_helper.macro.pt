@@ -14,7 +14,7 @@
        </li>
        <li class="next"
 		   tal:condition="options/nextlink">
-         <a href="${nextlink}" rel="next" i18n:translate="">Older posts</a>
+         <a href="${options/nextlink}" rel="next" i18n:translate="">Older posts</a>
        </li>
      </ul>
 </nav>
